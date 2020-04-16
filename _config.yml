@@ -106,3 +106,8 @@ search:
 codemirror:
   modes:
     ['javascript', 'css', 'xml', 'htmlmixed', 'clike', 'php', 'shell', 'python']
+deploy:
+  type: git
+  repo: https://github.com/happy-niko/happy-niko.github.io
+  # example, https://github.com/hexojs/hexojs.github.io
+  branch: gh-pages
