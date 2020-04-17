@@ -79,6 +79,26 @@
                                     </div>
                                     <div class="timeline-marker"></div>
                                     <div class="timeline-content">
+                                        <a class="timeline-title" target="_self" href="/2018/07/14/%E9%97%AD%E5%8C%85%E5%AE%9E%E7%8E%B0%E5%80%92%E8%AE%A1%E6%97%B6%E7%A8%8B%E5%BA%8F/">闭包实现倒计时程序</a>
+                                        <p>
+                                            话不多说直接贴代码var dj = (function() {
+            return {
+                time: function() {
+                    // setTimeout 内部this 指向
+                    var This = this;
+
+                    if (Thi...
+                                        </p>
+                                    </div>
+                                </li>
+                            
+                                
+                                <li class="timeline-item">
+                                    <div class="timeline-info">
+                                        <span class="gradient-text">七月 14, 2018</span>
+                                    </div>
+                                    <div class="timeline-marker"></div>
+                                    <div class="timeline-content">
                                         <a class="timeline-title" target="_self" href="/2018/07/14/debounce&&throttle/">函数的防抖和节流</a>
                                         <p>
                                             
@@ -131,6 +151,43 @@ function debounce(fn, de...
                                         <p>
                                             先上代码let asdasd
 
+                                        </p>
+                                    </div>
+                                </li>
+                            
+                                
+                                <li class="timeline-item period">
+                                    <div class="timeline-info"></div>
+                                    <div class="timeline-marker"></div>
+                                    <div class="timeline-content">
+                                        <h2 class="timeline-title">十二月 2017</h2>
+                                    </div>
+                                </li>
+                                
+                                <li class="timeline-item">
+                                    <div class="timeline-info">
+                                        <span class="gradient-text">十二月 06, 2017</span>
+                                    </div>
+                                    <div class="timeline-marker"></div>
+                                    <div class="timeline-content">
+                                        <a class="timeline-title" target="_self" href="/2017/12/06/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">Es6学习总结 </a>
+                                        <p>
+                                            let 特性
+不可以重复申明
+
+没有预解析过程（即变量声明提前）
+
+块级作用域 ：一个变量或者函数只有在该区域才起作用
+{
+  //块级作用域
+  let a = 1
+  console.log(a)
+}
+
+//举个例子：for循环依次输出 0~10
+for (var i = 0; i &lt; 10; i++) {
+  setTimeout(function () {
+    consol...
                                         </p>
                                     </div>
                                 </li>
@@ -316,41 +373,6 @@ Atom優秀的插件
                                     <div class="timeline-info"></div>
                                     <div class="timeline-marker"></div>
                                     <div class="timeline-content">
-                                        <h2 class="timeline-title">十二月 2016</h2>
-                                    </div>
-                                </li>
-                                
-                                <li class="timeline-item">
-                                    <div class="timeline-info">
-                                        <span class="gradient-text">十二月 06, 2016</span>
-                                    </div>
-                                    <div class="timeline-marker"></div>
-                                    <div class="timeline-content">
-                                        <a class="timeline-title" target="_self" href="/2016/12/06/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">ecma6 学习总结</a>
-                                        <p>
-                                            变量声明--let
----
-let特性
-1. 不可以重复申明
-2. 没有预解析过程（即变量声明提前）
-3. 块级作用域 ：一个变量或者函数只有在该区域才起作用
-    ````javascript
-     { //块级作用域
-        let a = 1;
-        console.log(a)
-     }
-
- //举个例子：for循环依次输出 0~10
- for(var i...
-                                        </p>
-                                    </div>
-                                </li>
-                            
-                                
-                                <li class="timeline-item period">
-                                    <div class="timeline-info"></div>
-                                    <div class="timeline-marker"></div>
-                                    <div class="timeline-content">
                                         <h2 class="timeline-title">十月 2016</h2>
                                     </div>
                                 </li>
@@ -371,26 +393,6 @@ MDN 的解释：
 Symbol()函数会返回symbol类型的值，每个从Symbol()返回的symbol值都是唯一的， 一个symbol值能作为对象属性的标识符； 这是该数据类型仅有的目的。
 个人理解：
 Symbol类型是es6新增的一个数据类型,Es5的基本数据类型（undefined，null,Object,function,Number,stri...
-                                        </p>
-                                    </div>
-                                </li>
-                            
-                                
-                                <li class="timeline-item">
-                                    <div class="timeline-info">
-                                        <span class="gradient-text">十月 20, 2016</span>
-                                    </div>
-                                    <div class="timeline-marker"></div>
-                                    <div class="timeline-content">
-                                        <a class="timeline-title" target="_self" href="/2016/10/20/%E9%97%AD%E5%8C%85%E5%AE%9E%E7%8E%B0%E5%80%92%E8%AE%A1%E6%97%B6%E7%A8%8B%E5%BA%8F/">干货--使用闭包实现js倒计时功能</a>
-                                        <p>
-                                            话不多说直接贴代码var dj = (function() {
-            return {
-                time: function() {
-                    // setTimeout 内部this 指向
-                    var This = this;
-
-                    if (Thi...
                                         </p>
                                     </div>
                                 </li>
@@ -620,18 +622,26 @@ font-face
                                     <div class="timeline-content">
                                         <a class="timeline-title" target="_self" href="/2015/12/06/%E5%88%A4%E6%96%AD%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%BB%84%E6%98%AF%E5%90%A6%E7%9B%B8%E7%AD%89-%E5%88%A4%E6%96%AD%E4%B8%A4%E4%B8%AA%E5%AF%B9%E8%B1%A1%E6%98%AF%E5%90%A6%E7%9B%B8%E7%AD%89/">判断两个数组是否相等    &amp;&amp;   判断两个对象是否相等  </a>
                                         <p>
-                                            
-数组比较
-方法 1：
+                                            let obj1 = {
+  a: 1,
+  b: {
+    c: 2,
+    d: 3,
+  },
+}
 
-JSON.stringify(a1) == JSON.stringify(a2)
-//或者
-a1.toString() == a2.toString()
+let obj2 = {
+  a: 1,
+  b: {
+    c: 2,
+    d: 3,
+  },
+}
 
+console.log(isEqual(obj1, obj2))
 
-
-
-不建议使用此方法这种方法在某些情况下是可行的，当两个数组的元素顺序相同且元素都可以转换成字符串的情况下确实可行，但是这样的代码存有隐患，比如数字被转换成字符串，数字“1”和字符串“1”会被认为相等，可能造成...
+function isObject(obj) {
+  return typeof obj === &#...
                                         </p>
                                     </div>
                                 </li>

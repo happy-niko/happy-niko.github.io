@@ -10,18 +10,19 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="TriDiamond Obsidian,"> 
-    <meta name="description" content="我想分享给你一些我的想法,
-数组比较
-方法 1：
+    <meta name="description" content="我想分享给你一些我的想法,let obj1 = {
+  a: 1,
+  b: {
+    c: 2,
+    d: 3,
+  },
+}
 
-JSON.stringify(a1) == JSON.stringify(a2)
-//或者
-a1.toString() == a2.toString()
-
-
-
-
-不建议使用,"> 
+let obj2 = {
+  a: 1,
+  b: {
+    c: 2,
+    d,"> 
     <meta name="author" content="niko"> 
     <link rel="alternative" href="atom.xml" title="niko" type="application/atom+xml"> 
     <link rel="icon" href="/img/logo_icon.png"> 
@@ -110,13 +111,13 @@ a1.toString() == a2.toString()
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    4.8k
+                    868
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                    4 mins.
+                    1 mins.
                 </span>
                 
                 
@@ -150,116 +151,55 @@ a1.toString() == a2.toString()
 <div class="article">
     <div class='main'>
         <div class="content markdown animated fadeIn">
-            <blockquote>
-<h5 id="数组比较"><a href="#数组比较" class="headerlink" title="数组比较"></a>数组比较</h5></blockquote>
-<p>方法 1：</p>
-<pre><code class="javascript">
-JSON.stringify(a1) == JSON.stringify(a2)
-//或者
-a1.toString() == a2.toString()
-
-</code></pre>
-<a id="more"></a>
-
-<h4 id="不建议使用此方法"><a href="#不建议使用此方法" class="headerlink" title="不建议使用此方法"></a>不建议使用此方法</h4><h6 id="这种方法在某些情况下是可行的，当两个数组的元素顺序相同且元素都可以转换成字符串的情况下确实可行，但是这样的代码存有隐患，比如数字被转换成字符串，数字“1”和字符串“1”会被认为相等，可能造成调试困难，不推荐使用。"><a href="#这种方法在某些情况下是可行的，当两个数组的元素顺序相同且元素都可以转换成字符串的情况下确实可行，但是这样的代码存有隐患，比如数字被转换成字符串，数字“1”和字符串“1”会被认为相等，可能造成调试困难，不推荐使用。" class="headerlink" title="这种方法在某些情况下是可行的，当两个数组的元素顺序相同且元素都可以转换成字符串的情况下确实可行，但是这样的代码存有隐患，比如数字被转换成字符串，数字“1”和字符串“1”会被认为相等，可能造成调试困难，不推荐使用。"></a><span style="color:red">这种方法在某些情况下是可行的，当两个数组的元素顺序相同且元素都可以转换成字符串的情况下确实可行，但是这样的代码存有隐患，比如数字被转换成字符串，数字“1”和字符串“1”会被认为相等，可能造成调试困难，不推荐使用。</span></h6><p>方法2 ：</p>
-<pre><code class="javascript">
- // Warn if overriding existing method
-if(Array.prototype.equals)
-console.warn(&quot;Overriding existing Array.prototype.equals. Possible causes: New API defines the method, there&#39;s a framework conflict or you&#39;ve got double inclusions in your code.&quot;);
- // attach the .equals method to Array&#39;s prototype to call it on any array
- Array.prototype.equals = function (array) {
-// if the other array is a falsy value, return
-if (!array)
-         return false;
-
-     // compare lengths - can save a lot of time
-     if (this.length != array.length)
-         return false;
-
-     for (var i = 0, l = this.length; i &lt; l; i++) {
-        // Check if we have nested arrays
-         if (this[i] instanceof Array &amp;&amp; array[i] instanceof Array) {
-           // recurse into the nested arrays
-             if (!this[i].equals(array[i]))
-                 return false;       
-         }           
-         else if (this[i] != array[i]) {
-            // Warning - two different object instances will never be equal: {x:20} != {x:20}
-            return false;   
-        }           
-     }       
-     return true;
- }
- // Hide method from for-in loops
- Object.defineProperty(Array.prototype, &quot;equals&quot;, {enumerable: false});
-
-var a = [1,2,3] ;
-var b = [1,2,4] ;
-
-
-a.equals(b)</code></pre>
-<blockquote>
-<h5 id="对象的比较"><a href="#对象的比较" class="headerlink" title="对象的比较"></a>对象的比较</h5></blockquote>
-<pre><code class="javascript">Object.prototype.equals = function(object2) {
-    //For the first loop, we only check for types
-    for (propName in this) {
-        //Check for inherited methods and properties - like .equals itself
-        //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty
-        //Return false if the return value is different
-        if (this.hasOwnProperty(propName) != object2.hasOwnProperty(propName)) {
-            return false;
-        }
-        //Check instance type
-        else if (typeof this[propName] != typeof object2[propName]) {
-            //Different types =&gt; not equal
-            return false;
-        }
-    }
-    //Now a deeper check using other objects property names
-    for(propName in object2) {
-        //We must check instances anyway, there may be a property that only exists in object2
-            //I wonder, if remembering the checked values from the first loop would be faster or not
-        if (this.hasOwnProperty(propName) != object2.hasOwnProperty(propName)) {
-            return false;
-        }
-        else if (typeof this[propName] != typeof object2[propName]) {
-            return false;
-        }
-        //If the property is inherited, do not check any more (it must be equa if both objects inherit it)
-        if(!this.hasOwnProperty(propName))
-          continue;
-
-        //Now the detail check and recursion
-
-        //This returns the script back to the array comparing
-        /**REQUIRES Array.equals**/
-        if (this[propName] instanceof Array &amp;&amp; object2[propName] instanceof Array) {
-                   // recurse into the nested arrays
-           if (!this[propName].equals(object2[propName]))
-                        return false;
-        }
-        else if (this[propName] instanceof Object &amp;&amp; object2[propName] instanceof Object) {
-                   // recurse into another objects
-                   //console.log(&quot;Recursing to compare &quot;, this[propName],&quot;with&quot;,object2[propName], &quot; both named \&quot;&quot;+propName+&quot;\&quot;&quot;);
-           if (!this[propName].equals(object2[propName]))
-                        return false;
-        }
-        //Normal value comparison for strings and numbers
-        else if(this[propName] != object2[propName]) {
-           return false;
-        }
-    }
-    //If everything passed, let&#39;s say YES
-    return true;
+            <pre><code class="javascript">let obj1 = {
+  a: 1,
+  b: {
+    c: 2,
+    d: 3,
+  },
 }
 
-var a = {a:1,b:2} ;
-var b = {a:1,b:2} ;
-b.equals(a)
+let obj2 = {
+  a: 1,
+  b: {
+    c: 2,
+    d: 3,
+  },
+}
 
+console.log(isEqual(obj1, obj2))
 
+function isObject(obj) {
+  return typeof obj === &#39;object&#39;
+}
 
-</code></pre>
+function isEqual(obj1, obj2) {
+  // 1.判断是不是对象，如果不是对象直接 === 出结果
+  if (!isObject(obj1) &amp;&amp; !isObject(obj2)) {
+    return obj1 === obj2
+  }
+  // 2. 如果是对象的话就先判断是不是直接 === 是的话直接返回 true
+  if (obj1 === obj2) {
+    return true
+  }
+
+  // 3. 如果2不通过 则开始深度遍历 并判断是否相等
+  //   3.1 先判断key的个数，如果个数不相等，就直接返回false ，如果相等 继续执行
+  let obj1Keys = Object.keys(obj1)
+  let obj2Keys = Object.keys(obj2)
+  if (obj1Keys.length !== obj2Keys.length) {
+    return false
+  }
+  //   3.2 以 obj1为基准  依次递归调用 与 obj2 做比较
+  for (let i in obj1) {
+    const res = isEqual(obj1, obj2)
+    if (!res) {
+      return false
+    }
+  }
+
+  return true
+}</code></pre>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls"
@@ -298,7 +238,7 @@ b.equals(a)
                 <ul>
                     <li><a href="/">20 <p>文章</p></a></li>
                     <li><a href="/categories">9 <p>分类</p></a></li>
-                    <li><a href="/tags">10 <p>标签</p></a></li>
+                    <li><a href="/tags">11 <p>标签</p></a></li>
                 </ul>
             </div>
             
