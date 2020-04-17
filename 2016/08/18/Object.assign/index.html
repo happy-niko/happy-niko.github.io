@@ -11,7 +11,10 @@
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="TriDiamond Obsidian,"> 
     <meta name="description" content="我想分享给你一些我的想法,Es5中实现
-1234567891011121314151617181920212223242526	//对象assign 方法var createAssigner = function(keysF,"> 
+    //对象assign 方法
+var createAssigner = function(keysFunc,defaults){
+  return function(obj){
+,"> 
     <meta name="author" content="niko"> 
     <link rel="alternative" href="atom.xml" title="niko" type="application/atom+xml"> 
     <link rel="icon" href="/img/logo_icon.png"> 
@@ -100,13 +103,13 @@
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    4.1k
+                    826
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                    4 mins.
+                    1 mins.
                 </span>
                 
                 
@@ -141,13 +144,38 @@
     <div class='main'>
         <div class="content markdown animated fadeIn">
             <p>Es5中实现</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">	<span class="comment">//对象assign 方法</span></span><br><span class="line"><span class="keyword">var</span> createAssigner = <span class="function"><span class="keyword">function</span>(<span class="params">keysFunc,defaults</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">obj</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> length = <span class="built_in">arguments</span>.lenth;</span><br><span class="line">    <span class="keyword">if</span>(defaults) obj = <span class="built_in">Object</span>(obj);</span><br><span class="line">    <span class="keyword">if</span>(length&lt;<span class="number">2</span>||obj==<span class="literal">null</span>) <span class="keyword">return</span> obj ;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> index=<span class="number">1</span>;index.length;index++)&#123;</span><br><span class="line">      <span class="keyword">var</span> source = <span class="built_in">arguments</span>[index],keys = keysFunc(source),l = keys.length;</span><br><span class="line">      <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>;i&lt;l;i++)&#123;</span><br><span class="line">        <span class="keyword">var</span> key = keys[i];</span><br><span class="line">        <span class="keyword">if</span>(!defaults || obj[key] == <span class="keyword">void</span> <span class="number">0</span>)</span><br><span class="line">          obj[key] = source[key];</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> obj;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> allkeys = <span class="function"><span class="keyword">function</span>(<span class="params">obj</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> keys = [];</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> key <span class="keyword">in</span> obj) keys.push(key);</span><br><span class="line">  <span class="keyword">return</span> keys ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> extend = createAssigner(allkeys);</span><br><span class="line">extend(&#123;<span class="attr">t</span>:<span class="number">1</span>&#125;,&#123;<span class="attr">k</span>:<span class="number">2</span>&#125;)</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript">    //对象assign 方法
+var createAssigner = function(keysFunc,defaults){
+  return function(obj){
+    var length = arguments.lenth;
+    if(defaults) obj = Object(obj);
+    if(length&lt;2||obj==null) return obj ;
+    for(var index=1;index.length;index++){
+      var source = arguments[index],keys = keysFunc(source),l = keys.length;
+      for(var i = 0;i&lt;l;i++){
+        var key = keys[i];
+        if(!defaults || obj[key] == void 0)
+          obj[key] = source[key];
+      }
+    }
+    return obj;
+  }
+}
 
+var allkeys = function(obj){
+  var keys = [];
+  for(var key in obj) keys.push(key);
+  return keys ;
+}
+
+var extend = createAssigner(allkeys);
+extend({t:1},{k:2})
+</code></pre>
 <a id="more"></a>
 
 
 <p>Es6中实现</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.assign(&#123;<span class="attr">t</span>:<span class="number">1</span>&#125;,&#123;<span class="attr">t</span>:<span class="number">2</span>&#125;) ;</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript">Object.assign({t:1},{t:2}) ;</code></pre>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls"
@@ -185,8 +213,8 @@
                 </div>
                 <ul>
                     <li><a href="/">20 <p>文章</p></a></li>
-                    <li><a href="/categories">10 <p>分类</p></a></li>
-                    <li><a href="/tags">11 <p>标签</p></a></li>
+                    <li><a href="/categories">9 <p>分类</p></a></li>
+                    <li><a href="/tags">10 <p>标签</p></a></li>
                 </ul>
             </div>
             

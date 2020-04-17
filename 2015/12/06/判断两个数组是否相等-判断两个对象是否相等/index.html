@@ -13,7 +13,11 @@
     <meta name="description" content="我想分享给你一些我的想法,
 数组比较
 方法 1：
-1234JSON.stringify(a1) == JSON.stringify(a2)//或者a1.toString() == a2.toString()
+
+JSON.stringify(a1) == JSON.stringify(a2)
+//或者
+a1.toString() == a2.toString()
+
 
 
 
@@ -106,13 +110,13 @@
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    15k
+                    4.8k
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                    14 mins.
+                    4 mins.
                 </span>
                 
                 
@@ -149,15 +153,113 @@
             <blockquote>
 <h5 id="数组比较"><a href="#数组比较" class="headerlink" title="数组比较"></a>数组比较</h5></blockquote>
 <p>方法 1：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">JSON</span>.stringify(a1) == <span class="built_in">JSON</span>.stringify(a2)</span><br><span class="line"><span class="comment">//或者</span></span><br><span class="line">a1.toString() == a2.toString()</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript">
+JSON.stringify(a1) == JSON.stringify(a2)
+//或者
+a1.toString() == a2.toString()
 
+</code></pre>
 <a id="more"></a>
 
 <h4 id="不建议使用此方法"><a href="#不建议使用此方法" class="headerlink" title="不建议使用此方法"></a>不建议使用此方法</h4><h6 id="这种方法在某些情况下是可行的，当两个数组的元素顺序相同且元素都可以转换成字符串的情况下确实可行，但是这样的代码存有隐患，比如数字被转换成字符串，数字“1”和字符串“1”会被认为相等，可能造成调试困难，不推荐使用。"><a href="#这种方法在某些情况下是可行的，当两个数组的元素顺序相同且元素都可以转换成字符串的情况下确实可行，但是这样的代码存有隐患，比如数字被转换成字符串，数字“1”和字符串“1”会被认为相等，可能造成调试困难，不推荐使用。" class="headerlink" title="这种方法在某些情况下是可行的，当两个数组的元素顺序相同且元素都可以转换成字符串的情况下确实可行，但是这样的代码存有隐患，比如数字被转换成字符串，数字“1”和字符串“1”会被认为相等，可能造成调试困难，不推荐使用。"></a><span style="color:red">这种方法在某些情况下是可行的，当两个数组的元素顺序相同且元素都可以转换成字符串的情况下确实可行，但是这样的代码存有隐患，比如数字被转换成字符串，数字“1”和字符串“1”会被认为相等，可能造成调试困难，不推荐使用。</span></h6><p>方法2 ：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"> <span class="comment">// Warn if overriding existing method</span></span><br><span class="line"><span class="keyword">if</span>(<span class="built_in">Array</span>.prototype.equals)</span><br><span class="line"><span class="built_in">console</span>.warn(<span class="string">"Overriding existing Array.prototype.equals. Possible causes: New API defines the method, there's a framework conflict or you've got double inclusions in your code."</span>);</span><br><span class="line"> <span class="comment">// attach the .equals method to Array's prototype to call it on any array</span></span><br><span class="line"> <span class="built_in">Array</span>.prototype.equals = <span class="function"><span class="keyword">function</span> (<span class="params">array</span>) </span>&#123;</span><br><span class="line"><span class="comment">// if the other array is a falsy value, return</span></span><br><span class="line"><span class="keyword">if</span> (!array)</span><br><span class="line">         <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">     <span class="comment">// compare lengths - can save a lot of time</span></span><br><span class="line">     <span class="keyword">if</span> (<span class="keyword">this</span>.length != array.length)</span><br><span class="line">         <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">     <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, l = <span class="keyword">this</span>.length; i &lt; l; i++) &#123;</span><br><span class="line">        <span class="comment">// Check if we have nested arrays</span></span><br><span class="line">         <span class="keyword">if</span> (<span class="keyword">this</span>[i] <span class="keyword">instanceof</span> <span class="built_in">Array</span> &amp;&amp; array[i] <span class="keyword">instanceof</span> <span class="built_in">Array</span>) &#123;</span><br><span class="line">           <span class="comment">// recurse into the nested arrays</span></span><br><span class="line">             <span class="keyword">if</span> (!<span class="keyword">this</span>[i].equals(array[i]))</span><br><span class="line">                 <span class="keyword">return</span> <span class="literal">false</span>;       </span><br><span class="line">         &#125;           </span><br><span class="line">         <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">this</span>[i] != array[i]) &#123;</span><br><span class="line">            <span class="comment">// Warning - two different object instances will never be equal: &#123;x:20&#125; != &#123;x:20&#125;</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;   </span><br><span class="line">        &#125;           </span><br><span class="line">     &#125;       </span><br><span class="line">     <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">// Hide method from for-in loops</span></span><br><span class="line"> <span class="built_in">Object</span>.defineProperty(<span class="built_in">Array</span>.prototype, <span class="string">"equals"</span>, &#123;<span class="attr">enumerable</span>: <span class="literal">false</span>&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>] ;</span><br><span class="line"><span class="keyword">var</span> b = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">4</span>] ;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">a.equals(b)</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript">
+ // Warn if overriding existing method
+if(Array.prototype.equals)
+console.warn(&quot;Overriding existing Array.prototype.equals. Possible causes: New API defines the method, there&#39;s a framework conflict or you&#39;ve got double inclusions in your code.&quot;);
+ // attach the .equals method to Array&#39;s prototype to call it on any array
+ Array.prototype.equals = function (array) {
+// if the other array is a falsy value, return
+if (!array)
+         return false;
+
+     // compare lengths - can save a lot of time
+     if (this.length != array.length)
+         return false;
+
+     for (var i = 0, l = this.length; i &lt; l; i++) {
+        // Check if we have nested arrays
+         if (this[i] instanceof Array &amp;&amp; array[i] instanceof Array) {
+           // recurse into the nested arrays
+             if (!this[i].equals(array[i]))
+                 return false;       
+         }           
+         else if (this[i] != array[i]) {
+            // Warning - two different object instances will never be equal: {x:20} != {x:20}
+            return false;   
+        }           
+     }       
+     return true;
+ }
+ // Hide method from for-in loops
+ Object.defineProperty(Array.prototype, &quot;equals&quot;, {enumerable: false});
+
+var a = [1,2,3] ;
+var b = [1,2,4] ;
+
+
+a.equals(b)</code></pre>
 <blockquote>
 <h5 id="对象的比较"><a href="#对象的比较" class="headerlink" title="对象的比较"></a>对象的比较</h5></blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.prototype.equals = <span class="function"><span class="keyword">function</span>(<span class="params">object2</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//For the first loop, we only check for types</span></span><br><span class="line">    <span class="keyword">for</span> (propName <span class="keyword">in</span> <span class="keyword">this</span>) &#123;</span><br><span class="line">        <span class="comment">//Check for inherited methods and properties - like .equals itself</span></span><br><span class="line">        <span class="comment">//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty</span></span><br><span class="line">        <span class="comment">//Return false if the return value is different</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.hasOwnProperty(propName) != object2.hasOwnProperty(propName)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//Check instance type</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="keyword">this</span>[propName] != <span class="keyword">typeof</span> object2[propName]) &#123;</span><br><span class="line">            <span class="comment">//Different types =&gt; not equal</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//Now a deeper check using other objects property names</span></span><br><span class="line">    <span class="keyword">for</span>(propName <span class="keyword">in</span> object2) &#123;</span><br><span class="line">        <span class="comment">//We must check instances anyway, there may be a property that only exists in object2</span></span><br><span class="line">            <span class="comment">//I wonder, if remembering the checked values from the first loop would be faster or not</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.hasOwnProperty(propName) != object2.hasOwnProperty(propName)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="keyword">this</span>[propName] != <span class="keyword">typeof</span> object2[propName]) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//If the property is inherited, do not check any more (it must be equa if both objects inherit it)</span></span><br><span class="line">        <span class="keyword">if</span>(!<span class="keyword">this</span>.hasOwnProperty(propName))</span><br><span class="line">          <span class="keyword">continue</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//Now the detail check and recursion</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//This returns the script back to the array comparing</span></span><br><span class="line">        <span class="comment">/**REQUIRES Array.equals**/</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>[propName] <span class="keyword">instanceof</span> <span class="built_in">Array</span> &amp;&amp; object2[propName] <span class="keyword">instanceof</span> <span class="built_in">Array</span>) &#123;</span><br><span class="line">                   <span class="comment">// recurse into the nested arrays</span></span><br><span class="line">           <span class="keyword">if</span> (!<span class="keyword">this</span>[propName].equals(object2[propName]))</span><br><span class="line">                        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">this</span>[propName] <span class="keyword">instanceof</span> <span class="built_in">Object</span> &amp;&amp; object2[propName] <span class="keyword">instanceof</span> <span class="built_in">Object</span>) &#123;</span><br><span class="line">                   <span class="comment">// recurse into another objects</span></span><br><span class="line">                   <span class="comment">//console.log("Recursing to compare ", this[propName],"with",object2[propName], " both named \""+propName+"\"");</span></span><br><span class="line">           <span class="keyword">if</span> (!<span class="keyword">this</span>[propName].equals(object2[propName]))</span><br><span class="line">                        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//Normal value comparison for strings and numbers</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(<span class="keyword">this</span>[propName] != object2[propName]) &#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//If everything passed, let's say YES</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = &#123;<span class="attr">a</span>:<span class="number">1</span>,<span class="attr">b</span>:<span class="number">2</span>&#125; ;</span><br><span class="line"><span class="keyword">var</span> b = &#123;<span class="attr">a</span>:<span class="number">1</span>,<span class="attr">b</span>:<span class="number">2</span>&#125; ;</span><br><span class="line">b.equals(a)</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript">Object.prototype.equals = function(object2) {
+    //For the first loop, we only check for types
+    for (propName in this) {
+        //Check for inherited methods and properties - like .equals itself
+        //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty
+        //Return false if the return value is different
+        if (this.hasOwnProperty(propName) != object2.hasOwnProperty(propName)) {
+            return false;
+        }
+        //Check instance type
+        else if (typeof this[propName] != typeof object2[propName]) {
+            //Different types =&gt; not equal
+            return false;
+        }
+    }
+    //Now a deeper check using other objects property names
+    for(propName in object2) {
+        //We must check instances anyway, there may be a property that only exists in object2
+            //I wonder, if remembering the checked values from the first loop would be faster or not
+        if (this.hasOwnProperty(propName) != object2.hasOwnProperty(propName)) {
+            return false;
+        }
+        else if (typeof this[propName] != typeof object2[propName]) {
+            return false;
+        }
+        //If the property is inherited, do not check any more (it must be equa if both objects inherit it)
+        if(!this.hasOwnProperty(propName))
+          continue;
+
+        //Now the detail check and recursion
+
+        //This returns the script back to the array comparing
+        /**REQUIRES Array.equals**/
+        if (this[propName] instanceof Array &amp;&amp; object2[propName] instanceof Array) {
+                   // recurse into the nested arrays
+           if (!this[propName].equals(object2[propName]))
+                        return false;
+        }
+        else if (this[propName] instanceof Object &amp;&amp; object2[propName] instanceof Object) {
+                   // recurse into another objects
+                   //console.log(&quot;Recursing to compare &quot;, this[propName],&quot;with&quot;,object2[propName], &quot; both named \&quot;&quot;+propName+&quot;\&quot;&quot;);
+           if (!this[propName].equals(object2[propName]))
+                        return false;
+        }
+        //Normal value comparison for strings and numbers
+        else if(this[propName] != object2[propName]) {
+           return false;
+        }
+    }
+    //If everything passed, let&#39;s say YES
+    return true;
+}
+
+var a = {a:1,b:2} ;
+var b = {a:1,b:2} ;
+b.equals(a)
+
+
+
+</code></pre>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls"
@@ -195,8 +297,8 @@
                 </div>
                 <ul>
                     <li><a href="/">20 <p>文章</p></a></li>
-                    <li><a href="/categories">10 <p>分类</p></a></li>
-                    <li><a href="/tags">11 <p>标签</p></a></li>
+                    <li><a href="/categories">9 <p>分类</p></a></li>
+                    <li><a href="/tags">10 <p>标签</p></a></li>
                 </ul>
             </div>
             

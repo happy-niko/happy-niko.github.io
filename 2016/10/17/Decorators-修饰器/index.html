@@ -102,13 +102,13 @@
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    8.3k
+                    1.9k
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                    8 mins.
+                    2 mins.
                 </span>
                 
                 
@@ -146,16 +146,82 @@
 <p>简介：修饰器是一个函数，用于修饰类的行为（修改 扩展类的功能，修饰器只在类的范围使用）。</p>
 </blockquote>
 <p> 需安装：npm install babel-plugin-transform-decorators-legacy –save-dev</p>
-<h4 id="1-限制某个属性-是只读的"><a href="#1-限制某个属性-是只读的" class="headerlink" title="1.限制某个属性 是只读的"></a>1.限制某个属性 是只读的</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"> 	<span class="keyword">let</span> readonly = <span class="function"><span class="keyword">function</span>(<span class="params">target,name,descriptor</span>)</span>&#123;</span><br><span class="line"> 		<span class="comment">// target :修改的类本身</span></span><br><span class="line"> 		<span class="comment">// name ： 属性本身</span></span><br><span class="line"> 		<span class="comment">// descriptor ：属性的描述对象</span></span><br><span class="line"> 		descriptor.writable = <span class="literal">false</span> ;  <span class="comment">//只读效果</span></span><br><span class="line"> 		<span class="keyword">return</span> descriptor ;</span><br><span class="line"> 	&#125;</span><br><span class="line"></span><br><span class="line"> 	<span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line"> 		@readonly  <span class="comment">// 修饰器</span></span><br><span class="line"> 		time()&#123;</span><br><span class="line"> 			<span class="keyword">return</span> <span class="string">'2018-01-01'</span> ;</span><br><span class="line"> 		&#125;</span><br><span class="line"> 	&#125;</span><br><span class="line"></span><br><span class="line"> 	<span class="keyword">let</span> test=<span class="keyword">new</span> Test();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  	test.time=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">       <span class="built_in">console</span>.log(<span class="string">'reset time'</span>);</span><br><span class="line">  	&#125;;</span><br><span class="line"></span><br><span class="line"> 	<span class="built_in">console</span>.log(test.time()) ;  <span class="comment">//  报错</span></span><br><span class="line"></span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="1-限制某个属性-是只读的"><a href="#1-限制某个属性-是只读的" class="headerlink" title="1.限制某个属性 是只读的"></a>1.限制某个属性 是只读的</h4><pre><code class="javascript">{
+     let readonly = function(target,name,descriptor){
+         // target :修改的类本身
+         // name ： 属性本身
+         // descriptor ：属性的描述对象
+         descriptor.writable = false ;  //只读效果
+         return descriptor ;
+     }
 
+     class Test {
+         @readonly  // 修饰器
+         time(){
+             return &#39;2018-01-01&#39; ;
+         }
+     }
+
+     let test=new Test();
+
+
+      test.time=function(){
+       console.log(&#39;reset time&#39;);
+      };
+
+     console.log(test.time()) ;  //  报错
+
+ }</code></pre>
 <a id="more"></a>
 
-<h4 id="2-在类的外面-使用修饰器-（必须在class的前面使用）"><a href="#2-在类的外面-使用修饰器-（必须在class的前面使用）" class="headerlink" title="2.在类的外面 使用修饰器  （必须在class的前面使用）"></a>2.在类的外面 使用修饰器  （必须在class的前面使用）</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="keyword">let</span> typename=<span class="function"><span class="keyword">function</span>(<span class="params">target,name,descriptor</span>)</span>&#123;</span><br><span class="line">    target.myname=<span class="string">'hello'</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  @typename</span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'类修饰符'</span>,Test.myname);</span><br><span class="line">  <span class="comment">// 第三方库修饰器的js库：core-decorators; npm install core-decorators</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2-在类的外面-使用修饰器-（必须在class的前面使用）"><a href="#2-在类的外面-使用修饰器-（必须在class的前面使用）" class="headerlink" title="2.在类的外面 使用修饰器  （必须在class的前面使用）"></a>2.在类的外面 使用修饰器  （必须在class的前面使用）</h4><pre><code class="javascript">{
+  let typename=function(target,name,descriptor){
+    target.myname=&#39;hello&#39;;
+  }
 
+  @typename
+  class Test{
+
+  }
+
+  console.log(&#39;类修饰符&#39;,Test.myname);
+  // 第三方库修饰器的js库：core-decorators; npm install core-decorators
+}</code></pre>
 <blockquote>
 <p>埋点系统</p>
 </blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 案例1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 日志系统 ： 传统 将埋点写到业务逻辑中</span></span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">let</span> log =<span class="function">(<span class="params">type</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">target,name,descriptor</span>)</span>&#123;</span><br><span class="line">      <span class="keyword">let</span> src_method = descriptor.value ;</span><br><span class="line">      descriptor.value =<span class="function">(<span class="params">...arg</span>)=&gt;</span>&#123;</span><br><span class="line">        src_method.apply(target,arg);</span><br><span class="line">        <span class="built_in">console</span>.info(<span class="string">`log <span class="subst">$&#123;type&#125;</span>`</span>);</span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">AD</span></span>&#123;</span><br><span class="line">    @log(<span class="string">'show'</span>)</span><br><span class="line">    show()&#123;</span><br><span class="line">      <span class="built_in">console</span>.info(<span class="string">'ad is show'</span>) ;</span><br><span class="line">    &#125;</span><br><span class="line">    click()&#123;</span><br><span class="line">      <span class="built_in">console</span>.info(<span class="string">'ad is click'</span>) ;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> ad = <span class="keyword">new</span> AD() ;</span><br><span class="line">  ad.show();</span><br><span class="line">  ad.click();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 好处：埋点抽离出来</span></span><br></pre></td></tr></table></figure>
+<pre><code class="javascript">// 案例1
+
+// 日志系统 ： 传统 将埋点写到业务逻辑中
+
+{
+  let log =(type)=&gt;{
+    return function(target,name,descriptor){
+      let src_method = descriptor.value ;
+      descriptor.value =(...arg)=&gt;{
+        src_method.apply(target,arg);
+        console.info(`log ${type}`);
+
+      }
+    }
+  }
+
+  class AD{
+    @log(&#39;show&#39;)
+    show(){
+      console.info(&#39;ad is show&#39;) ;
+    }
+    click(){
+      console.info(&#39;ad is click&#39;) ;
+    }
+  }
+
+  let ad = new AD() ;
+  ad.show();
+  ad.click();
+}
+
+// 好处：埋点抽离出来   </code></pre>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls"
@@ -193,8 +259,8 @@
                 </div>
                 <ul>
                     <li><a href="/">20 <p>文章</p></a></li>
-                    <li><a href="/categories">10 <p>分类</p></a></li>
-                    <li><a href="/tags">11 <p>标签</p></a></li>
+                    <li><a href="/categories">9 <p>分类</p></a></li>
+                    <li><a href="/tags">10 <p>标签</p></a></li>
                 </ul>
             </div>
             

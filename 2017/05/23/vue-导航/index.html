@@ -117,13 +117,13 @@
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    3.8k
+                    1.4k
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                    3 mins.
+                    1 mins.
                 </span>
                 
                 
@@ -177,13 +177,34 @@
 <ol>
 <li>当一个 Vue 实例被创建时，它向 Vue 的响应式系统中加入了其 data 对象中能找到的所有的属性。当这些属性的值发生改变时，视图将会产生“响应”，即匹配更新为新的值。<strong>当这些数据改变时，视图会进行重渲染。</strong></li>
 </ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 我们的数据对象</span></span><br><span class="line"><span class="keyword">var</span> data = &#123; <span class="attr">a</span>: <span class="number">1</span> &#125;</span><br><span class="line"><span class="comment">// 该对象被加入到一个 Vue 实例中</span></span><br><span class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  data: data</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 他们引用相同的对象！</span></span><br><span class="line">vm.a === data.a <span class="comment">// =&gt; true</span></span><br><span class="line"><span class="comment">// 设置属性也会影响到原始数据</span></span><br><span class="line">vm.a = <span class="number">2</span></span><br><span class="line">data.a <span class="comment">// =&gt; 2</span></span><br><span class="line"><span class="comment">// ... 反之亦然</span></span><br><span class="line">data.a = <span class="number">3</span></span><br><span class="line">vm.a <span class="comment">// =&gt; 3</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="javascript">// 我们的数据对象
+var data = { a: 1 }
+// 该对象被加入到一个 Vue 实例中
+var vm = new Vue({
+  data: data
+})
+// 他们引用相同的对象！
+vm.a === data.a // =&gt; true
+// 设置属性也会影响到原始数据
+vm.a = 2
+data.a // =&gt; 2
+// ... 反之亦然
+data.a = 3
+vm.a // =&gt; 3</code></pre>
 <blockquote>
 <p>生命周期：每个 Vue 实例在被创建之前都要经过一系列的初始化过程。例如需要设置数据监听、编译模板、挂载实例到 DOM、在数据变化时更新 DOM 等。同时在这个过程中也会运行一些叫做生命周期钩子的函数，给予用户机会在一些特定的场景下添加他们自己的代码。</p>
 </blockquote>
 <p>比如 created 钩子可以用来在一个实例被创建之后执行代码：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  data: &#123;</span><br><span class="line">    a: <span class="number">1</span></span><br><span class="line">  &#125;,</span><br><span class="line">  created: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// `this` 指向 vm 实例</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'a is: '</span> + <span class="keyword">this</span>.a)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// =&gt; "a is: 1"</span></span><br></pre></td></tr></table></figure>
+<pre><code class="javascript">new Vue({
+  data: {
+    a: 1
+  },
+  created: function () {
+    // `this` 指向 vm 实例
+    console.log(&#39;a is: &#39; + this.a)
+  }
+})
+// =&gt; &quot;a is: 1&quot;</code></pre>
 <p><strong>* 也有一些其它的钩子，在实例生命周期的不同场景下调用，如 mounted、updated、destroyed。钩子的 this 指向调用它的 Vue 实例。*</strong></p>
 <p><img src="https://app.yinxiang.com/shard/s72/res/60a600bf-fb6b-4b92-9641-094df5ba02e1" alt="Alt text"></p>
 
@@ -223,8 +244,8 @@
                 </div>
                 <ul>
                     <li><a href="/">20 <p>文章</p></a></li>
-                    <li><a href="/categories">10 <p>分类</p></a></li>
-                    <li><a href="/tags">11 <p>标签</p></a></li>
+                    <li><a href="/categories">9 <p>分类</p></a></li>
+                    <li><a href="/tags">10 <p>标签</p></a></li>
                 </ul>
             </div>
             

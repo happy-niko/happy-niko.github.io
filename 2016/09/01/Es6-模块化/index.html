@@ -18,7 +18,12 @@
 
 语法
 
-1234567891011121314151617181920212223242526272829303132333435363738394041424344,"> 
+// A文件
+// 作为一个模块   1.导出变量  2.导出函数  3.类暴露出去
+
+//第一种写法
+export let A = 123 ;
+export,"> 
     <meta name="author" content="niko"> 
     <link rel="alternative" href="atom.xml" title="niko" type="application/atom+xml"> 
     <link rel="icon" href="/img/logo_icon.png"> 
@@ -107,13 +112,13 @@
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    5.7k
+                    913
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                    5 mins.
+                    1 mins.
                 </span>
                 
                 
@@ -155,7 +160,60 @@
 <blockquote>
 <p>语法</p>
 </blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// A文件</span></span><br><span class="line"><span class="comment">// 作为一个模块   1.导出变量  2.导出函数  3.类暴露出去</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//第一种写法</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">let</span> A = <span class="number">123</span> ;</span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">argument</span>) </span>&#123;</span><br><span class="line">	<span class="comment">// body...</span></span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">'test'</span>) ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">Hello</span></span>&#123;</span><br><span class="line">	test()&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">'class'</span>) ;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//推荐使用第二种写法</span></span><br><span class="line"><span class="keyword">let</span> A = <span class="number">123</span> ;</span><br><span class="line"><span class="keyword">let</span> test = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">'test'</span>) ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Hello</span></span>&#123;</span><br><span class="line">	test()&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">'class'</span>) ;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  A,</span><br><span class="line">  test,</span><br><span class="line">  Hello</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//B 文件</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//第一种写法</span></span><br><span class="line"><span class="keyword">import</span>(A,test,Hello) <span class="keyword">from</span> <span class="string">'A文件地址'</span> ;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(A,test,Hello) ;</span><br><span class="line"></span><br><span class="line"><span class="comment">//第二种写法</span></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> lesson <span class="keyword">from</span> <span class="string">'./class/lesson17'</span> ;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(lesson.A,lesson.test,lesson.Hello) ;</span><br><span class="line"></span><br><span class="line"><span class="comment">//推荐使用第三种写法</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> lesson17 <span class="keyword">from</span> <span class="string">'./class/lesson17'</span> ;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(lesson17.A,lesson17.test,lesson17.Hello) ;</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript">// A文件
+// 作为一个模块   1.导出变量  2.导出函数  3.类暴露出去
+
+//第一种写法
+export let A = 123 ;
+export function test(argument) {
+    // body...
+    console.log(&#39;test&#39;) ;
+}
+
+export class Hello{
+    test(){
+        console.log(&#39;class&#39;) ;
+    }
+}
+//推荐使用第二种写法
+let A = 123 ;
+let test = function(){
+    console.log(&#39;test&#39;) ;
+}
+
+class Hello{
+    test(){
+        console.log(&#39;class&#39;) ;
+    }
+}
+
+export default {
+  A,
+  test,
+  Hello
+}
+
+
+
+
+//B 文件
+
+//第一种写法
+import(A,test,Hello) from &#39;A文件地址&#39; ;
+
+console.log(A,test,Hello) ;
+
+//第二种写法
+import * as lesson from &#39;./class/lesson17&#39; ;
+
+console.log(lesson.A,lesson.test,lesson.Hello) ;
+
+//推荐使用第三种写法
+
+import lesson17 from &#39;./class/lesson17&#39; ;
+
+console.log(lesson17.A,lesson17.test,lesson17.Hello) ;
+</code></pre>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls"
@@ -193,8 +251,8 @@
                 </div>
                 <ul>
                     <li><a href="/">20 <p>文章</p></a></li>
-                    <li><a href="/categories">10 <p>分类</p></a></li>
-                    <li><a href="/tags">11 <p>标签</p></a></li>
+                    <li><a href="/categories">9 <p>分类</p></a></li>
+                    <li><a href="/tags">10 <p>标签</p></a></li>
                 </ul>
             </div>
             

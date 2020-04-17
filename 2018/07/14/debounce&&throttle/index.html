@@ -5,12 +5,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Tag: 标签1 - niko</title>
+    <title>函数的防抖和节流 - niko</title>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="TriDiamond Obsidian,"> 
-    <meta name="description" content="我想分享给你一些我的想法,"> 
+    <meta name="description" content="我想分享给你一些我的想法,
+在前端开发的过程中，我们经常会需要绑定一些持续触发的事件，如 resize、scroll、mousemove 等等，但有些时候我们并不希望在事件持续触发的过程中那么频繁地去执行函数。通常这种情况下,"> 
     <meta name="author" content="niko"> 
     <link rel="alternative" href="atom.xml" title="niko" type="application/atom+xml"> 
     <link rel="icon" href="/img/logo_icon.png"> 
@@ -50,134 +51,78 @@
     </div>
     <span id="config-title" style="display:none">niko</span>
     <div id="loader"></div>
-    <div class="nav">
-    <ul id="menu-menu" class="menu">
-        
-        <li class="animated fadeInDown menu-item menu-item-type-post_type menu-item-object-page">
-            <a href="/whoami/" title="ABOUT" external="false">ABOUT</a>
-        </li>
-        
-        <li class="animated fadeInDown menu-item menu-item-type-post_type menu-item-object-page">
-            <a href="/categories/" title="CATEGORIES" external="false">CATEGORIES</a>
-        </li>
-        
-        <li class="animated fadeInDown menu-item menu-item-type-post_type menu-item-object-page">
-            <a href="/tags/" title="TAGS" external="false">TAGS</a>
-        </li>
-        
-        <li class="animated fadeInDown menu-item menu-item-type-post_type menu-item-object-page">
-            <a href="/archives/" title="ARCHIVES" external="false">ARCHIVES</a>
-        </li>
-        
-    </ul>
-    <p class="copyright" id="copyright">
-        &copy; 2020 niko.
-        Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a>
-        Theme <a href="https://github.com/TriDiamond/hexo-theme-obsidian" title="Obsidian" target="_blank" rel="noopener">Obsidian</a>
-    </p>
+    <div id="single">
+    <div class="scrollbar gradient-bg-rev"></div>
+<div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <div class="navigation animated fadeIn fast delay-1s">
+        <img id="home-icon" class="icon-home" src="/img/logo_icon.png" alt="" data-url="http://yoursite.com">
+        <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
+        <h3 class="subtitle">函数的防抖和节流</h3>
+        <div class="social">
+            <!--        <div class="like-icon">-->
+            <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+            <!--        </div>-->
+            <div>
+                <div class="share">
+                    
+                        <a href="javascript:;" class="iconfont icon-share1"></a>
+                        <div class="share-component-cc" data-disabled="facebook,douban,linkedin,diandian,tencent,google"></div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div id="container">
-  
-<div class="search-box">
-    <form class="site-search-form">
-        <span class="iconfont icon-search"></span>
-        <input type="text" id="local-search-input" class="st-search-input" />
-        <div class="iconfont icon-cross search-box-close"></div>
-    </form>
-    <div class="search-scrollable">
-        <div id="local-search-result" class="local-search-result-cls" data-initialise="首次搜索，正在载入索引文件，请稍后……"
-            data-start="输入关键词搜索。" data-empty="没有找到内容，请尝试更换检索词。">
-            <span>输入关键词搜索。</span>
+    <div class="section">
+        <div class=article-header-wrapper>
+    <div class="article-header">
+        <div class="article-cover animated fadeIn" style="
+            animation-delay: 600ms;
+            animation-duration: 1.2s;
+            background-image: 
+                radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
+                url(/img/cover.jpg) ">
+        </div>
+        <div class="else">
+            <p class="animated fadeInDown">
+                
+                <a href="/categories/javascript"><b>「
+                    </b>JAVASCRIPT<b> 」</b></a>
+                
+                七月 14, 2018
+            </p>
+            <h3 class="post-title animated fadeInDown"><a href="/2018/07/14/debounce&&throttle/" title="函数的防抖和节流" class="">函数的防抖和节流</a>
+            </h3>
+            
+            <p class="post-count animated fadeInDown">
+                
+                <span>
+                    <b class="iconfont icon-text2"></b> <i>文章字数</i>
+                    1.1k
+                </span>
+                
+                
+                <span>
+                    <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
+                    1 mins.
+                </span>
+                
+                
+                <span id="/2018/07/14/debounce&&throttle/" class="leancloud_visitors" data-flag-title="函数的防抖和节流">
+                    <b class="iconfont icon-read"></b> <i>阅读次数</i>
+                    <span class="leancloud-visitors-count">1000000</span>
+                </span>
+                
+                
+            </p>
+            
+            
+            <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/js%E5%B0%8F%E6%8A%80%E5%B7%A7/" rel="tag">js小技巧</a></li></ul>
+            
         </div>
     </div>
-</div>
-<div id="header">
-    <div>
-        <div class="logo animated fadeInDown">
-            <img src="/img/logo_icon.png" alt="">
-            <a class="image-logo" href="/"></a>
-        </div>
-        <ul id="menu-menu" class="menu text-menu">
-            
-            <li class="animated fadeInDown menu-item menu-item-type-post_type menu-item-object-page">
-                <a href="/whoami/" title="ABOUT" external="false" class="menu-link">ABOUT</a>
-            </li>
-            
-            <li class="animated fadeInDown menu-item menu-item-type-post_type menu-item-object-page">
-                <a href="/categories/" title="CATEGORIES" external="false" class="menu-link">CATEGORIES</a>
-            </li>
-            
-            <li class="animated fadeInDown menu-item menu-item-type-post_type menu-item-object-page">
-                <a href="/tags/" title="TAGS" external="false" class="menu-link">TAGS</a>
-            </li>
-            
-            <li class="animated fadeInDown menu-item menu-item-type-post_type menu-item-object-page">
-                <a href="/archives/" title="ARCHIVES" external="false" class="menu-link">ARCHIVES</a>
-            </li>
-            
-            
-            <li class="animated fadeInDown search-bar iconfont icon-search"></li>
-            
-        </ul>
-        <div class="iconfont icon-menu switchmenu gradient-text animated fadeInDown"></div>
-    </div>
-</div>
-<div id="screen">
-    <div id="mark">
-        <div class="cover animated fadeIn" style="
-            animation-delay: 900ms;
-            animation-duration: 2.8s;
-            background-image:
-                radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.56), #100e17),
-                url(http://domain.com/awesome.jpg);">
-        </div>
-    </div>
-    
-    <div id="post0" class="else">
-        <p class="animated fadeInDown">
-            
-            <a href="/categories/JavaScript"><b>「
-                </b>JAVASCRIPT<b> 」</b></a>
-            
-            七月 14, 2019
-        </p>
-        <h3 class="post-title animated fadeInDown">
-            <a href="/2019/07/14/%E2%80%98js%E4%B8%AD%E7%9A%84%E8%B7%A8%E5%9F%9F%E5%A4%84%E7%90%86%E2%80%99/" title="My awesome title" class="posttitle">My awesome title</a></h3>
-        
-        <p class="post-count animated fadeInDown">
-            
-            <span>
-                <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                455
-            </span>
-            
-            
-            <span>
-                <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                1 mins.
-            </span>
-            
-            
-            <span id="/2019/07/14/‘js中的跨域处理’/" class="leancloud_visitors" data-flag-title="">
-                <b class="iconfont icon-read"></b> <i>阅读次数</i>
-                <span class="leancloud-visitors-count">1000000</span>
-            </span>
-            
-        </p>
-        
-        
-        <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E6%A0%87%E7%AD%BE1/" rel="tag">标签1</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E6%A0%87%E7%AD%BE2/" rel="tag">标签2</a></li></ul>
-        
-        <div class="md-content animated fadeIn">
-            
-            <h3 id="1-什么是跨域？"><a href="#1-什么是跨域？" class="headerlink" title="1. 什么是跨域？"></a>1. 什么是跨域？</h3> <h3 id="2-跨域解决方案"><a href="#2-跨域解决方案" class="headerlink" title="2. 跨域解决方案:"></a>2. 跨域解决方案:</h3><h4 id="①-代理方式：zhang-yu-pingguo-ceshi-asd"><a href="#①-代理方式：zhang-yu-pingguo-ceshi-asd" class="headerlink" title="① 代理方式：zhang yu pingguo ceshi asd"></a>① 代理方式：zhang yu pingguo ceshi asd</h4>
-            
-            <span class="read-more"><a href="/2019/07/14/%E2%80%98js%E4%B8%AD%E7%9A%84%E8%B7%A8%E5%9F%9F%E5%A4%84%E7%90%86%E2%80%99/" title="查看全文" class="posttitle">查看全文</a>
-                <b class="iconfont icon-arrow-right- gradient-text"></b></span>
-        </div>
-    </div>
-    
 </div>
 
 <div class="screen-gradient-after">
@@ -185,20 +130,104 @@
         <div class="screen-gradient-content-inside">
             <div class="bold-underline-links screen-gradient-sponsor">
                 <p>
-                    <span class="typed-text"></span>
+                    <span class="animated fadeIn delay-1s"></span>
                 </p>
             </div>
         </div>
     </div>
 </div>
 
-  <div id="primary">
-    
-  </div>
-  
-</div>
-<div id="preview"></div>
+<div class="article">
+    <div class='main'>
+        <div class="content markdown animated fadeIn">
+            <blockquote>
+<p>在前端开发的过程中，我们经常会需要绑定一些持续触发的事件，如 resize、scroll、mousemove 等等，但有些时候我们并不希望在事件持续触发的过程中那么频繁地去执行函数。通常这种情况下我们怎么去解决的呢？一般来讲，防抖和节流是比较好的解决方案。</p>
+</blockquote>
+<h3 id="防抖"><a href="#防抖" class="headerlink" title="防抖"></a>防抖</h3><p>防抖即将多次操作合并一次执行，若持续触发 计时器清零 ，按照最后一个 操作去做</p>
+<pre><code class="javascript">function debounce(fn, delayTime) {
+  console.log(&#39;进来了&#39;)
+  let timer = null
+  return function () {
+    if (timer) {
+      clearTimeout(timer) // 如果有定时器 每次都清除
+    }
+    timer = setTimeout(() =&gt; {
+      fn()
+    }, delayTime)
+  }
+}</code></pre>
+<h3 id="节流"><a href="#节流" class="headerlink" title="节流"></a>节流</h3><p>节流的策略是，固定周期内，只执行一次动作，若有新事件触发，不执行。周期结束后，又有事件触发，开始新的周期。 节流策略也分前缘和延迟两种。与 debounce 类似，延迟是指 周期结束后执行动作，前缘是指执行动作后再开始周期。</p>
+<pre><code class="javascript">function throttle(func, delay) {
+  let run = true
+  return function () {
+    if (!run) {
+      return // 如果开关关闭了，那就直接不执行下边的代码
+    }
+    run = false // 持续触发的话，run一直是false，就会停在上边的判断那里
+    setTimeout(() =&gt; {
+      func.apply(this, arguments)
+      run = true // 定时器到时间之后，会把开关打开，我们的函数就会被执行
+    }, delay)
+  }
+}</code></pre>
 
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls"
+                data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+            <ul id="audio-list" style="display:none">
+                
+                
+                <li title='0' data-url='/statics/chengdu.mp3'></li>
+                
+                    
+            </ul>
+            
+            
+            
+            <div id="vcomments"></div>
+            
+        </div>
+        <div class="sidebar">
+            <div class="box animated fadeInRight">
+                <div class="subbox">
+                    <img src="/img/logo_icon.png" height=300 width=300></img>
+                    <p>niko</p>
+                    <span>Think like an artist, develop like an artisan</span>
+                    <dl>
+                        <dd><a href="https://github.com/TriDiamond" target="_blank"><span
+                                    class=" iconfont icon-github"></span></a></dd>
+                        <dd><a href="https://twitter.com/TriDiamond6" target="_blank"><span
+                                    class=" iconfont icon-twitter"></span></a></dd>
+                        <dd><a href="https://stackoverflow.com/users/7602324/tridiamond?tab=profile" target="_blank"><span
+                                    class=" iconfont icon-stack-overflow"></span></a></dd>
+                    </dl>
+                </div>
+                <ul>
+                    <li><a href="/">20 <p>文章</p></a></li>
+                    <li><a href="/categories">9 <p>分类</p></a></li>
+                    <li><a href="/tags">10 <p>标签</p></a></li>
+                </ul>
+            </div>
+            
+            
+            
+            <div class="box sticky animated fadeInRight faster">
+                <div id="toc" class="subbox">
+                    <h4>目录</h4>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#防抖"><span class="toc-number">1.</span> <span class="toc-text">防抖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#节流"><span class="toc-number">2.</span> <span class="toc-text">节流</span></a></li></ol>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</div>
+
+    </div>
+</div>
     <div id="back-to-top" class="animated fadeIn faster">
         <div class="flow"></div>
         <span class="percentage animated fadeIn faster">0%</span>

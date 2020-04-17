@@ -102,13 +102,13 @@
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    14k
+                    3.6k
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                    13 mins.
+                    3 mins.
                 </span>
                 
                 
@@ -149,8 +149,22 @@
 <blockquote>
 <p>基本用法：</p>
 </blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="comment">// Generator 基本用法</span></span><br><span class="line">	<span class="keyword">let</span> tell=<span class="function"><span class="keyword">function</span>* (<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">yield</span> <span class="string">'a'</span>;</span><br><span class="line">    <span class="keyword">yield</span> <span class="string">'b'</span>;</span><br><span class="line">border-left: <span class="number">5</span>px solid gray;    <span class="keyword">return</span> <span class="string">'c'</span></span><br><span class="line">  	&#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> k=tell();</span><br><span class="line"></span><br><span class="line">  <span class="built_in">console</span>.log(k.next());</span><br><span class="line">  <span class="built_in">console</span>.log(k.next());</span><br><span class="line">  <span class="built_in">console</span>.log(k.next());</span><br><span class="line">  <span class="built_in">console</span>.log(k.next());</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript">{
+    // Generator 基本用法
+    let tell=function* (){
+    yield &#39;a&#39;;
+    yield &#39;b&#39;;
+border-left: 5px solid gray;    return &#39;c&#39;
+      };
 
+  let k=tell();
+
+  console.log(k.next());
+  console.log(k.next());
+  console.log(k.next());
+  console.log(k.next());
+
+}</code></pre>
 <a id="more"></a>
 
 <blockquote>
@@ -159,23 +173,110 @@
 <blockquote>
 <p>任何一个对象的iterator接口都是部署到Symbol.iterator属性上，generator就是遍历器的生成函数，所以可以直接把generator直接赋值给Symbol.iterator，从而使得对象也具备了iterator接口。</p>
 </blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="keyword">let</span> obj=&#123;&#125;;</span><br><span class="line">  obj[<span class="built_in">Symbol</span>.iterator]=<span class="function"><span class="keyword">function</span>* (<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">yield</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">yield</span> <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">yield</span> <span class="number">3</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">let</span> value <span class="keyword">of</span> obj)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'value'</span>,value);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript">{
+  let obj={};
+  obj[Symbol.iterator]=function* (){
+    yield 1;
+    yield 2;
+    yield 3;
+  }
 
+  for(let value of obj){
+    console.log(&#39;value&#39;,value);
+  }
+}</code></pre>
 <blockquote>
 <p><strong>状态机</strong>  ： 比如使用A、B、C 描述一个事物三种状态。用Generator 处理特别适用。</p>
 </blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">let</span> state=<span class="function"><span class="keyword">function</span>* (<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="comment">//当状态为1 的时候 不断next() 可以循环状态</span></span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">      <span class="keyword">yield</span> <span class="string">'A'</span>;</span><br><span class="line">      <span class="keyword">yield</span> <span class="string">'B'</span>;</span><br><span class="line">      <span class="keyword">yield</span> <span class="string">'C'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">let</span> status=state();</span><br><span class="line">  <span class="built_in">console</span>.log(status.next());</span><br><span class="line">  <span class="built_in">console</span>.log(status.next());</span><br><span class="line">  <span class="built_in">console</span>.log(status.next());</span><br><span class="line">  <span class="built_in">console</span>.log(status.next());</span><br><span class="line">  <span class="built_in">console</span>.log(status.next());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="javascript">
+{
+  let state=function* (){
+    //当状态为1 的时候 不断next() 可以循环状态
+    while(1){
+      yield &#39;A&#39;;
+      yield &#39;B&#39;;
+      yield &#39;C&#39;;
+    }
+  }
+  let status=state();
+  console.log(status.next());
+  console.log(status.next());
+  console.log(status.next());
+  console.log(status.next());
+  console.log(status.next());
+}</code></pre>
 <p><strong>结果：</strong></p>
 <p><img src="https://app.yinxiang.com/shard/s72/res/326cd889-605a-48b8-8504-019b36da5092" alt="Alt text | center"></p>
 <blockquote>
 <p>async 语法</p>
 </blockquote>
-<h4 id="实例1：抽奖次数限制"><a href="#实例1：抽奖次数限制" class="headerlink" title="实例1：抽奖次数限制"></a>实例1：抽奖次数限制</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 抽奖逻辑 和 次数限制  分离</span></span><br><span class="line">	<span class="keyword">let</span> draw = <span class="function"><span class="keyword">function</span>(<span class="params">count</span>)</span>&#123;</span><br><span class="line">		<span class="comment">//具体逻辑</span></span><br><span class="line">		<span class="built_in">console</span>.info(<span class="string">`剩余<span class="subst">$&#123;count&#125;</span>次数`</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	draw(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 计算当前的次数   之前使用全局变量保存当前次数，这样会非常不安全  </span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// generator</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">let</span> residue = <span class="function"><span class="keyword">function</span>* (<span class="params">count</span>)</span>&#123;</span><br><span class="line">		<span class="keyword">while</span>(count&gt;<span class="number">0</span>)&#123; <span class="comment">// 次数限制限制</span></span><br><span class="line">			count -- ;</span><br><span class="line">			<span class="keyword">yield</span> draw(count) ; <span class="comment">//抽奖逻辑</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">let</span> star = residue (<span class="number">5</span>) ;</span><br><span class="line">	<span class="keyword">let</span> btn = <span class="built_in">document</span>.createElement(<span class="string">'button'</span>) ;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	btn.id = <span class="string">'start'</span> ;</span><br><span class="line">	btn.textContent = <span class="string">"抽奖"</span> ;</span><br><span class="line">	<span class="built_in">document</span>.body.appendChild(btn) ;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">document</span>.getElementById(<span class="string">'start'</span>).addEventListener(<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		star.next() ;</span><br><span class="line">	&#125;,<span class="literal">false</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="实例1：抽奖次数限制"><a href="#实例1：抽奖次数限制" class="headerlink" title="实例1：抽奖次数限制"></a>实例1：抽奖次数限制</h4><pre><code class="javascript">{
+
+    // 抽奖逻辑 和 次数限制  分离
+    let draw = function(count){
+        //具体逻辑
+        console.info(`剩余${count}次数`);
+    }
+
+    draw(1)
+
+    // 计算当前的次数   之前使用全局变量保存当前次数，这样会非常不安全  
+
+    // generator
+
+    let residue = function* (count){
+        while(count&gt;0){ // 次数限制限制
+            count -- ;
+            yield draw(count) ; //抽奖逻辑
+        }
+    }
+
+    let star = residue (5) ;
+    let btn = document.createElement(&#39;button&#39;) ;
 
 
+    btn.id = &#39;start&#39; ;
+    btn.textContent = &quot;抽奖&quot; ;
+    document.body.appendChild(btn) ;
+
+    document.getElementById(&#39;start&#39;).addEventListener(&#39;click&#39;,function(){
+        star.next() ;
+    },false)
+}</code></pre>
 <p><strong>结果：</strong></p>
 <p><img src="https://app.yinxiang.com/shard/s72/res/1e0566ee-6bb8-4d67-9e1c-cb73b82ebfa3" alt="Alt text | center"></p>
-<h4 id="实例2：长轮询的generator实现"><a href="#实例2：长轮询的generator实现" class="headerlink" title="实例2：长轮询的generator实现"></a>实例2：长轮询的generator实现</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 实例2   长轮询 ： 服务端数据 定期变化，前端 需要定时去取。之前 通过定时器不断的取  现在使用 generator</span></span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">let</span> ajax = <span class="function"><span class="keyword">function</span>* (<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="keyword">yield</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve,reject</span>)</span>&#123;</span><br><span class="line">			setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">				resolve(&#123;<span class="attr">code</span>:<span class="number">0</span>&#125;)</span><br><span class="line">			&#125;,<span class="number">200</span>) ;</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 长轮询</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">let</span> pull = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="keyword">var</span> generator = ajax() ;</span><br><span class="line">		<span class="keyword">let</span> step = generator.next() ;</span><br><span class="line">		step.value.then(<span class="function"><span class="keyword">function</span>(<span class="params">d</span>)</span>&#123;</span><br><span class="line">			<span class="built_in">console</span>.log(d) ;</span><br><span class="line">			<span class="keyword">if</span>(d.code !=<span class="number">0</span>)&#123;</span><br><span class="line">				setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params">d</span>)</span>&#123;</span><br><span class="line">					<span class="built_in">console</span>.log(<span class="string">'wait'</span>) ;</span><br><span class="line">					pull() ;</span><br><span class="line">				&#125;,<span class="number">1000</span>)</span><br><span class="line">			&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">				<span class="built_in">console</span>.log(d) ;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	pull() ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="实例2：长轮询的generator实现"><a href="#实例2：长轮询的generator实现" class="headerlink" title="实例2：长轮询的generator实现"></a>实例2：长轮询的generator实现</h4><pre><code class="javascript">// 实例2   长轮询 ： 服务端数据 定期变化，前端 需要定时去取。之前 通过定时器不断的取  现在使用 generator
+
+{
+    let ajax = function* (){
+        yield new Promise(function(resolve,reject){
+            setTimeout(function(){
+                resolve({code:0})
+            },200) ;
+        })
+    }
+
+    // 长轮询
+
+    let pull = function(){
+        var generator = ajax() ;
+        let step = generator.next() ;
+        step.value.then(function(d){
+            console.log(d) ;
+            if(d.code !=0){
+                setTimeout(function(d){
+                    console.log(&#39;wait&#39;) ;
+                    pull() ;
+                },1000)
+            }else{
+                console.log(d) ;
+            }
+        })
+    }
+
+    pull() ;
+}
+</code></pre>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls"
@@ -213,8 +314,8 @@
                 </div>
                 <ul>
                     <li><a href="/">20 <p>文章</p></a></li>
-                    <li><a href="/categories">10 <p>分类</p></a></li>
-                    <li><a href="/tags">11 <p>标签</p></a></li>
+                    <li><a href="/categories">9 <p>分类</p></a></li>
+                    <li><a href="/tags">10 <p>标签</p></a></li>
                 </ul>
             </div>
             

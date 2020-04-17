@@ -101,13 +101,13 @@
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    20k
+                    6.9k
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                    18 mins.
+                    6 mins.
                 </span>
                 
                 
@@ -152,8 +152,20 @@
 <li>无法正常检索堆栈信息，因为每一次回调都是系统层面上的新的堆栈 。</li>
 <li>在多个回调之间难以建立联系。</li>
 </ol>
-<h3 id="Promise-结构"><a href="#Promise-结构" class="headerlink" title="Promise 结构:"></a><strong>Promise 结构:</strong></h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(</span><br><span class="line">	<span class="comment">//执行器 executor</span></span><br><span class="line">	<span class="function"><span class="keyword">function</span> (<span class="params">resolve,reject</span>) </span>&#123;</span><br><span class="line">		<span class="comment">//一段耗时很长的异步操作</span></span><br><span class="line">		resolve() ; <span class="comment">//数据处理完成</span></span><br><span class="line">		reject() ; <span class="comment">//数据处理出错</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">)</span><br><span class="line">.then(<span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="comment">//成功 下一步</span></span><br><span class="line">&#125;,<span class="function"><span class="keyword">function</span> <span class="title">B</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="comment">// 失败，做相应的处理</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="Promise-结构"><a href="#Promise-结构" class="headerlink" title="Promise 结构:"></a><strong>Promise 结构:</strong></h3><pre><code class="javascript">new Promise(
+    //执行器 executor
+    function (resolve,reject) {
+        //一段耗时很长的异步操作
+        resolve() ; //数据处理完成
+        reject() ; //数据处理出错
+    }
 
+)
+.then(function A(){
+    //成功 下一步
+},function B(){
+    // 失败，做相应的处理
+})</code></pre>
 <h6 id="1-Promise-是一个代理对象，它和原先要进行的操作并无关系。只是将原来操作放入了executor"><a href="#1-Promise-是一个代理对象，它和原先要进行的操作并无关系。只是将原来操作放入了executor" class="headerlink" title="1.Promise 是一个代理对象，它和原先要进行的操作并无关系。只是将原来操作放入了executor"></a>1.Promise 是一个代理对象，它和原先要进行的操作并无关系。只是将原来操作放入了<code>executor</code></h6><h6 id="2-它通过引入一个回调，避免更多的回调"><a href="#2-它通过引入一个回调，避免更多的回调" class="headerlink" title="2.它通过引入一个回调，避免更多的回调"></a>2.它通过引入一个回调，避免更多的回调</h6><h3 id="Promise三个状态"><a href="#Promise三个状态" class="headerlink" title="*Promise三个状态 *"></a>*<em>Promise三个状态 *</em></h3><ol>
 <li><code>pending</code> 待定状态</li>
 <li>如果调用 <code>resolve()</code> 就进入  <code>fulfilled</code> 实现 操作成功状态</li>
@@ -163,8 +175,38 @@
 <p>Promise 状态一经改变就不会改变</p>
 <p>执行流程图  </p>
 <p><img src="./1520911191668.png" alt="执行流程图"></p>
-<h3 id="then-函数"><a href="#then-函数" class="headerlink" title=".then()函数"></a><strong>.then()函数</strong></h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 假如在.then()的函数里面不返回新的Promise，会怎样？</span></span><br><span class="line"><span class="comment">// https://www.imooc.com/video/16616</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'here we go'</span>);</span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">    setTimeout( <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        resolve(<span class="string">'hello'</span>);</span><br><span class="line">    &#125;, <span class="number">2000</span>);</span><br><span class="line">&#125;)</span><br><span class="line">    .then( <span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(value);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'everyone'</span>);</span><br><span class="line">        (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">                setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">                    <span class="built_in">console</span>.log(<span class="string">'Mr.Laurence'</span>);</span><br><span class="line">                    resolve(<span class="string">'Merry Xmas'</span>);</span><br><span class="line">                &#125;, <span class="number">2000</span>);</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;());</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;)</span><br><span class="line">    .then( <span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(value + <span class="string">' world'</span>);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">结果：</span><br><span class="line">here we go</span><br><span class="line">hello</span><br><span class="line">everyone</span><br><span class="line"><span class="literal">false</span> world</span><br><span class="line">Mr.Laurence</span><br></pre></td></tr></table></figure>
+<h3 id="then-函数"><a href="#then-函数" class="headerlink" title=".then()函数"></a><strong>.then()函数</strong></h3><pre><code class="javascript">// 假如在.then()的函数里面不返回新的Promise，会怎样？
+// https://www.imooc.com/video/16616
 
+console.log(&#39;here we go&#39;);
+new Promise(resolve =&gt; {
+    setTimeout( () =&gt; {
+        resolve(&#39;hello&#39;);
+    }, 2000);
+})
+    .then( value =&gt; {
+        console.log(value);
+        console.log(&#39;everyone&#39;);
+        (function () {
+            return new Promise(resolve =&gt; {
+                setTimeout(() =&gt; {
+                    console.log(&#39;Mr.Laurence&#39;);
+                    resolve(&#39;Merry Xmas&#39;);
+                }, 2000);
+            });
+        }());
+        return false;
+    })
+    .then( value =&gt; {
+        console.log(value + &#39; world&#39;);
+    });
+
+结果：
+here we go
+hello
+everyone
+false world
+Mr.Laurence</code></pre>
 <p><code>.then()</code>  接受两个函数作为参数，分别代表 <code>fulfilled</code> 和 ‘rejected’</p>
 <p><code>.then()</code> 返回一个新的Promise 实例，所以它可以链式调用</p>
 <p>当前面的    <code>Promise</code> 状态改变时，<code>.then()</code> 根据其最终状态，选择特定的状态响应函数执行 。</p>
@@ -179,20 +221,104 @@
 <li><p>对于我们来书，此时最好将其展开，会更好读</p>
 </li>
 </ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 嵌套.then()</span></span><br><span class="line"><span class="comment">// https://www.imooc.com/video/16618</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'start'</span>);</span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>( <span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Step 1'</span>);</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        resolve(<span class="number">100</span>);</span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line">&#125;)</span><br><span class="line">    .then( <span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'Step 1-1'</span>);</span><br><span class="line">            setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">                resolve(<span class="number">110</span>);</span><br><span class="line">            &#125;, <span class="number">1000</span>);</span><br><span class="line">        &#125;)</span><br><span class="line">            .then( <span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">                <span class="built_in">console</span>.log(<span class="string">'Step 1-2'</span>);</span><br><span class="line">                <span class="keyword">return</span> value;</span><br><span class="line">            &#125;)</span><br><span class="line">            .then( <span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">                <span class="built_in">console</span>.log(<span class="string">'Step 1-3'</span>);</span><br><span class="line">                <span class="keyword">return</span> value;</span><br><span class="line">            &#125;);</span><br><span class="line">    &#125;)</span><br><span class="line">    .then(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(value);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'Step 2'</span>);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">结果：</span><br><span class="line">start</span><br><span class="line">step <span class="number">1</span></span><br><span class="line">step <span class="number">1</span><span class="number">-1</span></span><br><span class="line">step <span class="number">1</span><span class="number">-2</span></span><br><span class="line">step <span class="number">1</span><span class="number">-3</span></span><br><span class="line"><span class="number">110</span></span><br><span class="line">step <span class="number">2</span></span><br></pre></td></tr></table></figure>
+<pre><code class="javascript">// 嵌套.then()
+// https://www.imooc.com/video/16618
 
+console.log(&#39;start&#39;);
+new Promise( resolve =&gt; {
+    console.log(&#39;Step 1&#39;);
+    setTimeout(() =&gt; {
+        resolve(100);
+    }, 1000);
+})
+    .then( value =&gt; {
+        return new Promise(resolve =&gt; {
+            console.log(&#39;Step 1-1&#39;);
+            setTimeout(() =&gt; {
+                resolve(110);
+            }, 1000);
+        })
+            .then( value =&gt; {
+                console.log(&#39;Step 1-2&#39;);
+                return value;
+            })
+            .then( value =&gt; {
+                console.log(&#39;Step 1-3&#39;);
+                return value;
+            });
+    })
+    .then(value =&gt; {
+        console.log(value);
+        console.log(&#39;Step 2&#39;);
+    });
 
-
-
+结果：
+start
+step 1
+step 1-1
+step 1-2
+step 1-3
+110
+step 2</code></pre>
 <h3 id="思考："><a href="#思考：" class="headerlink" title="思考："></a><strong>思考：</strong></h3><p>以下问题出自：<br><a href="https://pouchdb.com/2015/05/18/we-have-a-problem-with-promises.html" target="_blank" rel="noopener">原文：We have a problem with promises</a><br><a href="http://fex.baidu.com/blog/2015/07/we-have-a-problem-with-promises/" target="_blank" rel="noopener">FEX 中文翻译</a><br><a href="https://www.imooc.com/video/16619/0" target="_blank" rel="noopener">慕课网视频讲解</a></p>
-<h5 id="以下四种Promise-的区别是什么呢？"><a href="#以下四种Promise-的区别是什么呢？" class="headerlink" title="以下四种Promise 的区别是什么呢？"></a>以下四种Promise 的区别是什么呢？</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">doSomething().then(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> doSomethingElse();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">doSomething().then(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  doSomethingElse();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">doSomething().then(doSomethingElse());</span><br><span class="line"></span><br><span class="line">doSomething().then(doSomethingElse);</span><br></pre></td></tr></table></figure>
+<h5 id="以下四种Promise-的区别是什么呢？"><a href="#以下四种Promise-的区别是什么呢？" class="headerlink" title="以下四种Promise 的区别是什么呢？"></a>以下四种Promise 的区别是什么呢？</h5><pre><code class="javascript">doSomething().then(function () {
+  return doSomethingElse();
+});
+
+doSomething().then(function () {
+  doSomethingElse();
+});
+
+doSomething().then(doSomethingElse());
+
+doSomething().then(doSomethingElse);</code></pre>
+<h5 id="答案-："><a href="#答案-：" class="headerlink" title="答案 ："></a>答案 ：</h5><pre><code class="javascript">第一题：
+doSomething().then(function () {
+  return doSomethingElse();
+}).then(finalHandler);
+
+doSomething
+|-----------------|
+                  doSomethingElse(undefined)
+                  |------------------|
+                                     finalHandler(resultOfDoSomethingElse)
+                                     |------------------|
+第二题：
+doSomething().then(function () {
+  doSomethingElse();
+}).then(finalHandler);
+
+doSomething
+|-----------------|
+                  doSomethingElse(undefined)
+                  |------------------|
+                  finalHandler(undefined)
+                  |------------------|
+
+第三题：
+
+doSomething().then(doSomethingElse())
+  .then(finalHandler);
 
 
-<h5 id="答案-："><a href="#答案-：" class="headerlink" title="答案 ："></a>答案 ：</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">第一题：</span><br><span class="line">doSomething().then(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> doSomethingElse();</span><br><span class="line">&#125;).then(finalHandler);</span><br><span class="line"></span><br><span class="line">doSomething</span><br><span class="line">|-----------------|</span><br><span class="line">                  doSomethingElse(<span class="literal">undefined</span>)</span><br><span class="line">                  |------------------|</span><br><span class="line">                                     finalHandler(resultOfDoSomethingElse)</span><br><span class="line">                                     |------------------|</span><br><span class="line">第二题：</span><br><span class="line">doSomething().then(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  doSomethingElse();</span><br><span class="line">&#125;).then(finalHandler);</span><br><span class="line"></span><br><span class="line">doSomething</span><br><span class="line">|-----------------|</span><br><span class="line">                  doSomethingElse(<span class="literal">undefined</span>)</span><br><span class="line">                  |------------------|</span><br><span class="line">                  finalHandler(<span class="literal">undefined</span>)</span><br><span class="line">                  |------------------|</span><br><span class="line"></span><br><span class="line">第三题：</span><br><span class="line"></span><br><span class="line">doSomething().then(doSomethingElse())</span><br><span class="line">  .then(finalHandler);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">doSomething</span><br><span class="line">|-----------------|</span><br><span class="line">doSomethingElse(<span class="literal">undefined</span>)</span><br><span class="line">|---------------------------------|</span><br><span class="line">                  finalHandler(resultOfDoSomething)</span><br><span class="line">                  |------------------|</span><br><span class="line"></span><br><span class="line">第四题：</span><br><span class="line">doSomething().then(doSomethingElse)</span><br><span class="line">  .then(finalHandler);</span><br><span class="line"></span><br><span class="line">doSomething</span><br><span class="line">|-----------------|</span><br><span class="line">                  doSomethingElse(resultOfDoSomething)</span><br><span class="line">                  |------------------|</span><br><span class="line">                                     finalHandler(resultOfDoSomethingElse)</span><br><span class="line">                                     |------------------|</span><br></pre></td></tr></table></figure>
+doSomething
+|-----------------|
+doSomethingElse(undefined)
+|---------------------------------|
+                  finalHandler(resultOfDoSomething)
+                  |------------------|
 
+第四题：
+doSomething().then(doSomethingElse)
+  .then(finalHandler);
 
-
-
+doSomething
+|-----------------|
+                  doSomethingElse(resultOfDoSomething)
+                  |------------------|
+                                     finalHandler(resultOfDoSomethingElse)
+                                     |------------------|
+</code></pre>
 <h4 id="版权说明：以上均为-慕课网课程：Promise-入门-学习笔记-如有侵权联系我删除"><a href="#版权说明：以上均为-慕课网课程：Promise-入门-学习笔记-如有侵权联系我删除" class="headerlink" title="版权说明：以上均为 慕课网课程：Promise 入门 学习笔记,如有侵权联系我删除"></a>版权说明：以上均为 <a href="https://www.imooc.com/learn/949" target="_blank" rel="noopener">慕课网课程：Promise 入门</a> 学习笔记,如有侵权<a href="18735443767">联系我</a>删除</h4>
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls"
@@ -230,8 +356,8 @@
                 </div>
                 <ul>
                     <li><a href="/">20 <p>文章</p></a></li>
-                    <li><a href="/categories">10 <p>分类</p></a></li>
-                    <li><a href="/tags">11 <p>标签</p></a></li>
+                    <li><a href="/categories">9 <p>分类</p></a></li>
+                    <li><a href="/tags">10 <p>标签</p></a></li>
                 </ul>
             </div>
             
