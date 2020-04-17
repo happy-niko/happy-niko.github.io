@@ -120,11 +120,11 @@ a1.toString() == a2.toString()
                 </span>
                 
                 
-                <span id="/2015/12/06/判断两个数组是否相等-判断两个对象是否相等/" class="leancloud_visitors" data-flag-title="判断两个数组是否相等    &&   判断两个对象是否相等  ">
-                    <b class="iconfont icon-read"></b> <i>阅读次数</i>
-                    <span class="leancloud-visitors-count">1000000</span>
-                </span>
                 
+                <span id="busuanzi_container_page_pv">
+                    <b class="iconfont icon-read"></b> <i>阅读次数</i>
+                    <span id="busuanzi_value_page_pv">0</span>
+                </span>
                 
             </p>
             
@@ -289,8 +289,6 @@ b.equals(a)
 
 
             
-            
-            <div id="vcomments"></div>
             
         </div>
         <div class="sidebar">
@@ -569,40 +567,6 @@ b.equals(a)
     }
 </script>
 
-
-    
-<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
-
-    <script>
-
-        var valine = new Valine();
-
-        function initValine(path) {
-            if (!path) path = window.location.pathname;
-            let language = 'zh-CN';
-            if (!language) {
-                language = 'en';
-            } else {
-                language = language.toLowerCase();
-            }
-            valine.init({
-                el: '#vcomments',
-                appId: 'h0Nbcp32WtIpnnHaGTLWbtKo-gzGzoHsz',
-                appKey: 'hPhFiAi2vIj2OStCIi79waty',
-                notify: 'true',
-                verify: 'true',
-                avatar: 'happ_niko',
-                placeholder: '快写下你的想法与我互动',
-                visitor: 'true',
-                path: path,
-                lang: language
-            });
-        }
-
-        $(document).ready(function () {
-            initValine();
-        });
-    </script>
 
 
 

@@ -114,11 +114,11 @@ Symbol()函数会返回symbol类型的值，每个从Symbol()返回的symbol值�
                 </span>
                 
                 
-                <span id="/2016/10/21/Symbol数据类型/" class="leancloud_visitors" data-flag-title="Symbol数据类型">
-                    <b class="iconfont icon-read"></b> <i>阅读次数</i>
-                    <span class="leancloud-visitors-count">1000000</span>
-                </span>
                 
+                <span id="busuanzi_container_page_pv">
+                    <b class="iconfont icon-read"></b> <i>阅读次数</i>
+                    <span id="busuanzi_value_page_pv">0</span>
+                </span>
                 
             </p>
             
@@ -191,8 +191,6 @@ Symbol()函数会返回symbol类型的值，每个从Symbol()返回的symbol值�
 
 
             
-            
-            <div id="vcomments"></div>
             
         </div>
         <div class="sidebar">
@@ -471,40 +469,6 @@ Symbol()函数会返回symbol类型的值，每个从Symbol()返回的symbol值�
     }
 </script>
 
-
-    
-<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
-
-    <script>
-
-        var valine = new Valine();
-
-        function initValine(path) {
-            if (!path) path = window.location.pathname;
-            let language = 'zh-CN';
-            if (!language) {
-                language = 'en';
-            } else {
-                language = language.toLowerCase();
-            }
-            valine.init({
-                el: '#vcomments',
-                appId: 'h0Nbcp32WtIpnnHaGTLWbtKo-gzGzoHsz',
-                appKey: 'hPhFiAi2vIj2OStCIi79waty',
-                notify: 'true',
-                verify: 'true',
-                avatar: 'happ_niko',
-                placeholder: '快写下你的想法与我互动',
-                visitor: 'true',
-                path: path,
-                lang: language
-            });
-        }
-
-        $(document).ready(function () {
-            initValine();
-        });
-    </script>
 
 
 
