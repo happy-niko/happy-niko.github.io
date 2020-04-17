@@ -4,6 +4,75 @@
   
     
     <entry>
+      <title>webpack 高级配置</title>
+      <link href="/2018/12/15/webpack%E9%AB%98%E7%BA%A7%E9%85%8D%E7%BD%AE/"/>
+      <url>/2018/12/15/webpack%E9%AB%98%E7%BA%A7%E9%85%8D%E7%BD%AE/</url>
+      
+        <content type="html"><![CDATA[<h3 id="多入口配置"><a href="#多入口配置" class="headerlink" title="多入口配置"></a>多入口配置</h3><ul><li>entry</li><li>output</li><li>plugins</li></ul><p>webpack.dev.js</p><pre><code class="javascript">module.export = {  entry: {    index: path.join(srcPath, &#39;index.js&#39;),    other: path.join(srcPath, &#39;other.js&#39;),  },  plugins: [    // new HtmlWebpackPlugin({    //     template: path.join(srcPath, &#39;index.html&#39;),    //     filename: &#39;index.html&#39;    // })    // 多入口 - 生成 index.html    new HtmlWebpackPlugin({      template: path.join(srcPath, &#39;index.html&#39;),      filename: &#39;index.html&#39;,      // chunks 表示该页面要引用哪些 chunk （即上面的 index 和 other），默认全部引用      chunks: [&#39;index&#39;], // 只引用 index.js    }),    // 多入口 - 生成 other.html    new HtmlWebpackPlugin({      template: path.join(srcPath, &#39;other.html&#39;),      filename: &#39;other.html&#39;,      chunks: [&#39;other&#39;], // 只引用 other.js    }),  ],}</code></pre><p>webpack.prod.js</p><pre><code class="javascript">module.export = smart(webpackCommonConf, {  mode: production,  output: {    // filename: &#39;bundle.[contentHash:8].js&#39;,  // 打包代码时，加上 hash 戳    filename: &#39;[name].[contentHash:8].js&#39;, // name 即多入口时 entry 的 key    path: distPath,    // publicPath: &#39;http://cdn.abc.com&#39;  // 修改所有静态文件 url 的前缀（如 cdn 域名），这里暂时用不到  },})</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> webpack </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 工具 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>BFC 是什么？</title>
+      <link href="/2018/12/14/BFC/"/>
+      <url>/2018/12/14/BFC/</url>
+      
+        <content type="html"><![CDATA[<p>BFC 即块级格式化上下文 ，它是只元素 通过触发 BFC ，形成一个封闭的上下文，可以用来包住浮动元素（不是清除浮动哟）。就算子元素再怎么折腾，也不会影响外部元素了</p><p>display: flow-root 这个属性的功能就一个：触发 BFC</p><p>float 的值不为 none。<br>overflow 的值为 auto,scroll 或 hidden。<br>display 的值为 table-cell, table-caption, inline-block 中的任何一个。<br>position 的值不为 relative 和 static。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> CSS </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>webpack 基本配置</title>
+      <link href="/2018/12/14/webpac%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/"/>
+      <url>/2018/12/14/webpac%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/</url>
+      
+        <content type="html"><![CDATA[<p>首先 公共 <code>webpack.common.js</code> 和 <code>webpack.dev.js</code> <code>webpack.prod.js</code> 通过 <code>webpack-merge (smart)</code> 去做拆分<br>webpack 一切皆模块 ，配置 css loader 需要将 css 单独摘出来</p><p>webpack.commom.js</p><pre><code class="javascript">const path = require(&#39;path&#39;)const HtmlWebpackPlugin = require(&#39;html-webpack-plugin&#39;)const { srcPath, distPath } = require(&#39;./paths&#39;)module.exports = {  entry: path.join(srcPath, &#39;index&#39;),  module: {    rules: [      // 处理 ES6      {        test: /\.js$/,        loader: [&#39;babel-loader&#39;],        include: srcPath,        exclude: /node_modules/,      },      // {      //     test: /\.vue$/,      //     loader: [&#39;vue-loader&#39;],      //     include: srcPath      // },      // {      //     test: /\.css$/,      //     // loader 的执行顺序是：从后往前（知识点）      //     loader: [&#39;style-loader&#39;, &#39;css-loader&#39;]      // },      {        test: /\.css$/,        // loader 的执行顺序是：从后往前 cssloader 解析了 css 之后，插入到style loader 中   ，postcss-loader做浏览器兼容性。        loader: [&#39;style-loader&#39;, &#39;css-loader&#39;, &#39;postcss-loader&#39;], // 加了 postcss      },      {        test: /\.less$/,        // 增加 &#39;less-loader&#39; ，注意顺序        loader: [&#39;style-loader&#39;, &#39;css-loader&#39;, &#39;less-loader&#39;],      },    ],  },  plugins: [    new HtmlWebpackPlugin({      template: path.join(srcPath, &#39;index.html&#39;),      filename: &#39;index.html&#39;,    }),  ],}</code></pre><p>Webpack.dev.js</p><pre><code class="javascript">const path = require(&#39;path&#39;)const webpack = require(&#39;webpack&#39;)const webpackCommonConf = require(&#39;./webpack.common.js&#39;)const { smart } = require(&#39;webpack-merge&#39;)const { srcPath, distPath } = require(&#39;./paths&#39;)module.exports = smart(webpackCommonConf, {  mode: &#39;development&#39;,  module: {    rules: [      // 直接引入图片 url      {        test: /\.(png|jpg|jpeg|gif)$/,        use: &#39;file-loader&#39;,      },    ],  },  plugins: [    new webpack.DefinePlugin({      // window.ENV = &#39;development&#39;      ENV: JSON.stringify(&#39;development&#39;),    }),  ],  devServer: {    port: 8080,    progress: true, // 显示打包的进度条    contentBase: distPath, // 根目录    open: true, // 自动打开浏览器    compress: true, // 启动 gzip 压缩    // 设置代理    proxy: {      // 将本地 /api/xxx 代理到 localhost:3000/api/xxx      &#39;/api&#39;: &#39;http://localhost:3000&#39;,      // 将本地 /api2/xxx 代理到 localhost:3000/xxx      &#39;/api2&#39;: {        target: &#39;http://localhost:3000&#39;,        pathRewrite: {          &#39;/api2&#39;: &#39;&#39;,        },      },    },  },})</code></pre><p>postcss-loader 做浏览器兼容性。</p><pre><code class="javascript">// postcss.config.js   插件// 给 css3 配置 前缀module.exports = {  plugins: [require(&#39;autoprefixer&#39;)],}</code></pre><h3 id="图片的处理"><a href="#图片的处理" class="headerlink" title="图片的处理"></a>图片的处理</h3><p>webpack.dev.js 中</p><pre><code class="javascript"> module: {        rules: [            // 直接引入图片 url            {                test: /\.(png|jpg|jpeg|gif)$/,                use: &#39;file-loader&#39;            }        ]    },</code></pre><p>webpack.prod.js</p><pre><code class="javascript">rules: [  // 图片 - 考虑 base64 编码的情况  {    test: /\.(png|jpg|jpeg|gif)$/,    use: {      loader: &#39;url-loader&#39;,      options: {        // 小于 5kb 的图片用 base64 格式产出        // 否则，依然延用 file-loader 的形式，产出 url 格式        limit: 5 * 1024,        // 打包到 img 目录下        outputPath: &#39;/img1/&#39;,        // 设置图片的 cdn 地址（也可以统一在外面的 output 中设置，那将作用于所有静态资源）        // publicPath: &#39;http://cdn.abc.com&#39;      },    },  },]</code></pre><p><strong>对于小于 5kb 的图片 ，用 base64 的图片 随着 html 渲染，减少一次 http 请求</strong></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> webpack </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 工具 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>闭包实现倒计时程序</title>
       <link href="/2018/07/14/%E9%97%AD%E5%8C%85%E5%AE%9E%E7%8E%B0%E5%80%92%E8%AE%A1%E6%97%B6%E7%A8%8B%E5%BA%8F/"/>
       <url>/2018/07/14/%E9%97%AD%E5%8C%85%E5%AE%9E%E7%8E%B0%E5%80%92%E8%AE%A1%E6%97%B6%E7%A8%8B%E5%BA%8F/</url>
