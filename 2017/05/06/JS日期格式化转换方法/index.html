@@ -143,7 +143,7 @@ Date.prototype.format = function (,">
         <div class="content markdown animated fadeIn">
             <blockquote>
 <h5 id="将日期转换为指定的格式：比如转换成-年月日时分秒-这种格式：yyyy-MM-dd-hh-mm-ss-或者-yyyy-MM-dd"><a href="#将日期转换为指定的格式：比如转换成-年月日时分秒-这种格式：yyyy-MM-dd-hh-mm-ss-或者-yyyy-MM-dd" class="headerlink" title="将日期转换为指定的格式：比如转换成 年月日时分秒 这种格式：yyyy-MM-dd hh:mm:ss 或者 yyyy-MM-dd"></a>将日期转换为指定的格式：比如转换成 年月日时分秒 这种格式：yyyy-MM-dd hh:mm:ss 或者 yyyy-MM-dd</h5></blockquote>
-<pre><code>Date.prototype.format = function (fmt) {
+<pre><code class="javascript">Date.prototype.format = function (fmt) {
   var o = {
     &#39;M+&#39;: this.getMonth() + 1, //月份
     &#39;d+&#39;: this.getDate(), //日
@@ -178,7 +178,8 @@ console.log(time1)
 //或
 
 var time2 = new Date().format(&#39;yyyy-MM-dd&#39;)
-console.log(time2)</code></pre><a id="more"></a>
+console.log(time2)</code></pre>
+<a id="more"></a>
 
 <blockquote>
 <h5 id="将指定的日期转换为”年月日”的格式，代码如下："><a href="#将指定的日期转换为”年月日”的格式，代码如下：" class="headerlink" title="将指定的日期转换为”年月日”的格式，代码如下："></a>将指定的日期转换为”年月日”的格式，代码如下：</h5></blockquote>
@@ -216,7 +217,7 @@ console.log([year, month, date].join(&#39;-&#39;))</code></pre>
         <div class="sidebar">
             <div class="box animated fadeInRight">
                 <div class="subbox">
-                    <img src="https://res.cloudinary.com/tridiamond/image/upload/v1573019751/TriDiamond_logo_ui_xeublz.jpg" height=300 width=300></img>
+                    <img src="/img/logo_icon.png" height=300 width=300></img>
                     <p>niko</p>
                     <span>Think like an artist, develop like an artisan</span>
                     <dl>
@@ -502,10 +503,10 @@ console.log([year, month, date].join(&#39;-&#39;))</code></pre>
                 el: '#vcomments',
                 appId: 'h0Nbcp32WtIpnnHaGTLWbtKo-gzGzoHsz',
                 appKey: 'hPhFiAi2vIj2OStCIi79waty',
-                notify: 'true',
-                verify: 'true',
-                avatar: 'happ_niko',
-                placeholder: '快写下你的想法与我互动',
+                notify: 'false',
+                verify: 'false',
+                avatar: 'niko',
+                placeholder: 'Leave your throughs behind~',
                 visitor: 'true',
                 path: path,
                 lang: language

@@ -164,7 +164,7 @@
                     // 渲染数据到页面
                     This.rander();
                 },
-                rander: function() {   //做页面的数据渲染      
+                rander: function() {   //做页面的数据渲染
                     miaoStr = this.miao + &quot;&quot;;
 
                     if (miaoStr.length &lt;= 1) {
@@ -193,15 +193,14 @@
         })();</code></pre>
 <a id="more"></a>
 
-<h4 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h4><pre><code class="javascript">//从页面获取  个位 十位 元素ID  用于渲染   
-var gw = document.getElementById(&#39;gw&#39;);
-var sw = document.getElementById(&#39;sw&#39;);
+<h4 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h4><pre><code class="javascript">//从页面获取  个位 十位 元素ID  用于渲染
+var gw = document.getElementById(&#39;gw&#39;)
+var sw = document.getElementById(&#39;sw&#39;)
 
 //启动倒计时
-dj.start(60,gw,sw);
+dj.start(60, gw, sw)
 //停止倒计时
-dj.stop();
-</code></pre>
+dj.stop()</code></pre>
 <h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><p><img src="http://omy3ifpvu.bkt.clouddn.com/WechatIMG36.jpeg" alt="效果"></p>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
@@ -226,7 +225,7 @@ dj.stop();
         <div class="sidebar">
             <div class="box animated fadeInRight">
                 <div class="subbox">
-                    <img src="https://res.cloudinary.com/tridiamond/image/upload/v1573019751/TriDiamond_logo_ui_xeublz.jpg" height=300 width=300></img>
+                    <img src="/img/logo_icon.png" height=300 width=300></img>
                     <p>niko</p>
                     <span>Think like an artist, develop like an artisan</span>
                     <dl>
@@ -519,10 +518,10 @@ dj.stop();
                 el: '#vcomments',
                 appId: 'h0Nbcp32WtIpnnHaGTLWbtKo-gzGzoHsz',
                 appKey: 'hPhFiAi2vIj2OStCIi79waty',
-                notify: 'true',
-                verify: 'true',
-                avatar: 'happ_niko',
-                placeholder: '快写下你的想法与我互动',
+                notify: 'false',
+                verify: 'false',
+                avatar: 'niko',
+                placeholder: 'Leave your throughs behind~',
                 visitor: 'true',
                 path: path,
                 lang: language

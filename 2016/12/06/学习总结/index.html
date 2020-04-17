@@ -16,8 +16,7 @@ let特性
 1. 不可以重复申明
 2. 没有预解析过程（即变量声明提前）
 3. 块级作用域 ：一个变量或者函数只有在该区域才起作用
-    ````javascript
-,"> 
+    123456789101112,"> 
     <meta name="author" content="niko"> 
     <link rel="alternative" href="atom.xml" title="niko" type="application/atom+xml"> 
     <link rel="icon" href="/img/logo_icon.png"> 
@@ -106,13 +105,13 @@ let特性
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    3.6k
+                    17k
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                    3 mins.
+                    15 mins.
                 </span>
                 
                 
@@ -152,146 +151,33 @@ let特性
 1. 不可以重复申明
 2. 没有预解析过程（即变量声明提前）
 3. 块级作用域 ：一个变量或者函数只有在该区域才起作用
-    ````javascript
-     { //块级作用域
-        let a = 1;
-        console.log(a)
-     }
+    <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"> &#123; <span class="comment">//块级作用域</span></span><br><span class="line">	<span class="keyword">let</span> a = <span class="number">1</span>;</span><br><span class="line">	<span class="built_in">console</span>.log(a)</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="comment">//举个例子：for循环依次输出 0~10</span></span><br><span class="line"> <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span> ;i&lt;<span class="number">10</span>;i++)&#123;</span><br><span class="line">  setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  	<span class="built_in">console</span>.log(i);<span class="comment">//解析：上述结果 输出10次i ，原因为每次for循环结束后 setTimeout还在走，所以输出的i还是全局的i，所以一直是10</span></span><br><span class="line">  &#125;,<span class="number">0</span>)</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">//我们若想依次输出0~10 我们可以使用一个闭包函数， 在闭包函数中会形成一个作用域，将i以形参的形式传入，这样每次执行循环的时候，变量就会存在于闭包作用域中。</span></span><br><span class="line"> <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span> ;i&lt;<span class="number">10</span>;i++)&#123;</span><br><span class="line">    (<span class="function"><span class="keyword">function</span>(<span class="params">i</span>)</span>&#123;</span><br><span class="line">	 setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params">argument</span>) </span>&#123;</span><br><span class="line">		 <span class="built_in">console</span>.log(i);  <span class="comment">// 0,1,2,3,4,5,6,7,8,9,10</span></span><br><span class="line">	 &#125;)</span><br><span class="line">    &#125;)(i)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//在ecma6 中 我们可以使用let 来实现 ,let 将循环变成一个块级作用域，第一次循环完成之后，i就是那个0</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>;i&lt;<span class="number">10</span>;i++)&#123;</span><br><span class="line">	setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params">argument</span>) </span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(i);  <span class="comment">// 0,1,2,3,4,5,6,7,8,9,10</span></span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<pre><code> //举个例子：for循环依次输出 0~10
- for(var i = 0 ;i&lt;10;i++){
-  setTimeout(function(){
-      console.log(i);//解析：上述结果 输出10次i ，原因为每次for循环结束后 setTimeout还在走，所以输出的i还是全局的i，所以一直是10
-  },0)
- }
- //我们若想依次输出0~10 我们可以使用一个闭包函数， 在闭包函数中会形成一个作用域，将i以形参的形式传入，这样每次执行循环的时候，变量就会存在于闭包作用域中。
- for(var i = 0 ;i&lt;10;i++){
-    (function(i){
-     setTimeout(function (argument) {
-         console.log(i);  // 0,1,2,3,4,5,6,7,8,9,10
-     })
-    })(i)
-}
-//在ecma6 中 我们可以使用let 来实现 ,let 将循环变成一个块级作用域，第一次循环完成之后，i就是那个0
-for(let i = 0;i&lt;10;i++){
-    setTimeout(function (argument) {
-        console.log(i);  // 0,1,2,3,4,5,6,7,8,9,10
-    })
-}
-````
-
-&lt;!-- more --&gt;</code></pre><ol start="4">
+<pre><code>&lt;!-- more --&gt;</code></pre><ol start="4">
 <li>暂存死区   相似于 预解析  </li>
 </ol>
 <h6 style="color:green">常量声明--const</span>
 ---
 <b >const简介:</b>防止命名冲突  存一些东西用于对比  声明后不能被修改(变量值不可修改，若是一个对象是可以被修改的)
 
-<pre><code class="javascript">    const a = 1 ;
-    console.log(a) //1
-    // const a = 2 ;
-    console.log(a) //报错
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="number">1</span> ;</span><br><span class="line"><span class="built_in">console</span>.log(a) <span class="comment">//1</span></span><br><span class="line"><span class="comment">// const a = 2 ;</span></span><br><span class="line"><span class="built_in">console</span>.log(a) <span class="comment">//报错</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> b = &#123;<span class="attr">name</span>:<span class="number">1</span>&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(a.name);</span><br><span class="line">ab.name = <span class="number">2</span> ;</span><br><span class="line"><span class="built_in">console</span>.log(a) <span class="comment">// &#123;name:2&#125;</span></span><br></pre></td></tr></table></figure>
 
-    const b = {name:1};
-    console.log(a.name);
-    ab.name = 2 ;
-    console.log(a) // {name:2}</code></pre>
 <h6 style="color:green">变量的<b>"解构"</b>赋值</span>
 ---
 <b >解构赋值简介:</b> Es6 允许按照一定的模式，通过一定的格式将数组和对象中的值提取出来，赋给变量
-```javascript
-"use strict"
-//数组的解构赋值 ： 按照对应的顺序解构
-var arr = [1,2,3] ;
-var [a,b,c] = arr ;
-console.log(a,b,c)  // 1,2,3
-var arr1  = [1,[2,3]] ;
-var [d,[e,f]] =  arr ;
-console.log(d,e,f)  // 1,2,3
-//对象的解构赋值 ： 按照 对象的属性名称进行解构   和顺序无关 ,方便从对象里面拿到对应的值
-var obj = {
-    foo:function(){},
-    o:{},
-    arr:[],
-    str:'abc'
-}
-var {foo,o,arr,str} = obj ;
-console.log(foo,o,arr,str) ; // function(){}  {}  []  abc    
-//值的交换
-var x = 1 ;
-var y = 2 ;
-var [x,y] = [y,x];
-console.log(x,y) ; //2 1
-````
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">"use strict"</span></span><br><span class="line"><span class="comment">//数组的解构赋值 ： 按照对应的顺序解构</span></span><br><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>] ;</span><br><span class="line"><span class="keyword">var</span> [a,b,c] = arr ;</span><br><span class="line"><span class="built_in">console</span>.log(a,b,c)  <span class="comment">// 1,2,3</span></span><br><span class="line"><span class="keyword">var</span> arr1  = [<span class="number">1</span>,[<span class="number">2</span>,<span class="number">3</span>]] ;</span><br><span class="line"><span class="keyword">var</span> [d,[e,f]] =  arr ;</span><br><span class="line"><span class="built_in">console</span>.log(d,e,f)  <span class="comment">// 1,2,3</span></span><br><span class="line"><span class="comment">//对象的解构赋值 ： 按照 对象的属性名称进行解构   和顺序无关 ,方便从对象里面拿到对应的值</span></span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">	foo:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;,</span><br><span class="line">	o:&#123;&#125;,</span><br><span class="line">	arr:[],</span><br><span class="line">	str:<span class="string">'abc'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> &#123;foo,o,arr,str&#125; = obj ;</span><br><span class="line"><span class="built_in">console</span>.log(foo,o,arr,str) ; <span class="comment">// function()&#123;&#125;  &#123;&#125;  []  abc    </span></span><br><span class="line"><span class="comment">//值的交换</span></span><br><span class="line"><span class="keyword">var</span> x = <span class="number">1</span> ;</span><br><span class="line"><span class="keyword">var</span> y = <span class="number">2</span> ;</span><br><span class="line"><span class="keyword">var</span> [x,y] = [y,x];</span><br><span class="line"><span class="built_in">console</span>.log(x,y) ; <span class="comment">//2 1</span></span><br><span class="line"><span class="string">`</span></span><br></pre></td></tr></table></figure>
 
 <h6 style="color:green">ES6字符串的扩展</span>
 ---
-```javascript
-/*模板字符串*/
- var name = '狮父' ;
- var age = '18' ;
-//传统字符串拼接做法：
- var str = "你的名字是："+name+"你的年龄是"+age ;
- console.log(str)  
-//使用模板字符串
- varstr = `你的名字是${name},你的年龄是${age}`  //注意：使用反引号 `do something` 来包含,{}中可以进行运算 和 对象.属性
-/*字符串复制str.repeat(num);*/
- var str = a ;
- console.log(a.repeat(10)) // aaaaaaaaaa
-/*字符串的查找 str.includes()*/
- var str = 'abc' ;
- console.log(str.includes('a'))  //true
-/*查找对应字符是否在首部或者尾部*/
- var str = "shifu" ;
- str.startsWith('shi') // true ;
- str.endsWith('u') ; //true ;
-```
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*模板字符串*/</span></span><br><span class="line"> <span class="keyword">var</span> name = <span class="string">'狮父'</span> ;</span><br><span class="line"> <span class="keyword">var</span> age = <span class="string">'18'</span> ;</span><br><span class="line"><span class="comment">//传统字符串拼接做法：</span></span><br><span class="line"> <span class="keyword">var</span> str = <span class="string">"你的名字是："</span>+name+<span class="string">"你的年龄是"</span>+age ;</span><br><span class="line"> <span class="built_in">console</span>.log(str)  </span><br><span class="line"><span class="comment">//使用模板字符串</span></span><br><span class="line"> varstr = <span class="string">`你的名字是<span class="subst">$&#123;name&#125;</span>,你的年龄是<span class="subst">$&#123;age&#125;</span>`</span>  <span class="comment">//注意：使用反引号 `do something` 来包含,&#123;&#125;中可以进行运算 和 对象.属性</span></span><br><span class="line"><span class="comment">/*字符串复制str.repeat(num);*/</span></span><br><span class="line"> <span class="keyword">var</span> str = a ;</span><br><span class="line"> <span class="built_in">console</span>.log(a.repeat(<span class="number">10</span>)) <span class="comment">// aaaaaaaaaa</span></span><br><span class="line"><span class="comment">/*字符串的查找 str.includes()*/</span></span><br><span class="line"> <span class="keyword">var</span> str = <span class="string">'abc'</span> ;</span><br><span class="line"> <span class="built_in">console</span>.log(str.includes(<span class="string">'a'</span>))  <span class="comment">//true</span></span><br><span class="line"><span class="comment">/*查找对应字符是否在首部或者尾部*/</span></span><br><span class="line"> <span class="keyword">var</span> str = <span class="string">"shifu"</span> ;</span><br><span class="line"> str.startsWith(<span class="string">'shi'</span>) <span class="comment">// true ;</span></span><br><span class="line"> str.endsWith(<span class="string">'u'</span>) ; <span class="comment">//true ;</span></span><br></pre></td></tr></table></figure>
 <h6 style="color:green">ES6数值的扩展</span>
 ---
-```javascript
-/*二进制和八进制表示法:ES6提供使用前缀Ob和Oo表示 二进制八进制*/
-var a = 0b11 ; // 3
-var a = 0o11 ; // 9
-/*Math 方法的扩展*/
-// 取掉小数点
-var num = 1.234;
-console.log(Math.trunc(num)) // 1
-//判断一个数字是正数负数,正0还是0
-var num1 = 0 ;
-console.log(Math.sign(0)) //0 ;
-console.log(Math.sign(-0)) //  -0 ;
-//勾股定理  返回所有平方和的平方根
-console.log(Math.hypot(3,4))  //5    
-```
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*二进制和八进制表示法:ES6提供使用前缀Ob和Oo表示 二进制八进制*/</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="number">0b11</span> ; <span class="comment">// 3</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="number">0o11</span> ; <span class="comment">// 9</span></span><br><span class="line"><span class="comment">/*Math 方法的扩展*/</span></span><br><span class="line"><span class="comment">// 取掉小数点</span></span><br><span class="line"><span class="keyword">var</span> num = <span class="number">1.234</span>;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Math</span>.trunc(num)) <span class="comment">// 1</span></span><br><span class="line"><span class="comment">//判断一个数字是正数负数,正0还是0</span></span><br><span class="line"><span class="keyword">var</span> num1 = <span class="number">0</span> ;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Math</span>.sign(<span class="number">0</span>)) <span class="comment">//0 ;</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Math</span>.sign(<span class="number">-0</span>)) <span class="comment">//  -0 ;</span></span><br><span class="line"><span class="comment">//勾股定理  返回所有平方和的平方根</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Math</span>.hypot(<span class="number">3</span>,<span class="number">4</span>))  <span class="comment">//5</span></span><br></pre></td></tr></table></figure>
 <h6 style="color:green">ES6数组的扩展</span>
 ---
-```javascript
-/*转数组*/
-"use strict"
-var divs = document.getElementsByTagName('div')   //获取到类数组
-//es5做法
-var ele = [].slice.call('div') ; // []
-//es6 做法
-var eles =  Array.from(divs) ;   //[]
-//也可以字符串转数组
-var str = 'abc' ;
-console.log(Array.from(str))   // ['a','b','c']
-//将参数转换成数组   es5中:var arr = new Array(5) ,arr.length == 5 ;
-var arr  = Array.of(a,b,c,d,e) ;
-console.log(arr)  // [] ;
-/*数组查找元素*/
-//语法:arr.find()   arr.findIndex()
-//参数:1.回掉函数  2.回掉函数中的this指向
-//执行过程:遍历整个数组,遍历的过程中调用回调函数，如果回调函数的返回值为true，则返回当前正在遍历的元素，如果所有的元素都不符合条件则返回undefined
-var arr = [1,2,3,4,5] ;
-var n = arr.find(function(value,index,ar){
-    console.log(value) ; // 遍历的当前值  1
-    console.log(index) ; // 遍历值所处的位置索引 0
-    console.log(ar) ; // 当前正在遍历的数组本身  [1,2,3,4,5]
-})
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*转数组*/</span></span><br><span class="line"><span class="meta">"use strict"</span></span><br><span class="line"><span class="keyword">var</span> divs = <span class="built_in">document</span>.getElementsByTagName(<span class="string">'div'</span>)   <span class="comment">//获取到类数组</span></span><br><span class="line"><span class="comment">//es5做法</span></span><br><span class="line"><span class="keyword">var</span> ele = [].slice.call(<span class="string">'div'</span>) ; <span class="comment">// []</span></span><br><span class="line"><span class="comment">//es6 做法</span></span><br><span class="line"><span class="keyword">var</span> eles =  <span class="built_in">Array</span>.from(divs) ;   <span class="comment">//[]</span></span><br><span class="line"><span class="comment">//也可以字符串转数组</span></span><br><span class="line"><span class="keyword">var</span> str = <span class="string">'abc'</span> ;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Array</span>.from(str))   <span class="comment">// ['a','b','c']</span></span><br><span class="line"><span class="comment">//将参数转换成数组   es5中:var arr = new Array(5) ,arr.length == 5 ;</span></span><br><span class="line"><span class="keyword">var</span> arr  = <span class="built_in">Array</span>.of(a,b,c,d,e) ;</span><br><span class="line"><span class="built_in">console</span>.log(arr)  <span class="comment">// [] ;</span></span><br><span class="line"><span class="comment">/*数组查找元素*/</span></span><br><span class="line"><span class="comment">//语法:arr.find()   arr.findIndex()</span></span><br><span class="line"><span class="comment">//参数:1.回掉函数  2.回掉函数中的this指向</span></span><br><span class="line"><span class="comment">//执行过程:遍历整个数组,遍历的过程中调用回调函数，如果回调函数的返回值为true，则返回当前正在遍历的元素，如果所有的元素都不符合条件则返回undefined</span></span><br><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>] ;</span><br><span class="line"><span class="keyword">var</span> n = arr.find(<span class="function"><span class="keyword">function</span>(<span class="params">value,index,ar</span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(value) ; <span class="comment">// 遍历的当前值  1</span></span><br><span class="line">	<span class="built_in">console</span>.log(index) ; <span class="comment">// 遍历值所处的位置索引 0</span></span><br><span class="line">	<span class="built_in">console</span>.log(ar) ; <span class="comment">// 当前正在遍历的数组本身  [1,2,3,4,5]</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+/*new*/
 
-
-<pre><code>/*new*/</code></pre>
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls"
                 data-autoplay="false">
@@ -314,7 +200,7 @@ var n = arr.find(function(value,index,ar){
         <div class="sidebar">
             <div class="box animated fadeInRight">
                 <div class="subbox">
-                    <img src="https://res.cloudinary.com/tridiamond/image/upload/v1573019751/TriDiamond_logo_ui_xeublz.jpg" height=300 width=300></img>
+                    <img src="/img/logo_icon.png" height=300 width=300></img>
                     <p>niko</p>
                     <span>Think like an artist, develop like an artisan</span>
                     <dl>
@@ -600,10 +486,10 @@ var n = arr.find(function(value,index,ar){
                 el: '#vcomments',
                 appId: 'h0Nbcp32WtIpnnHaGTLWbtKo-gzGzoHsz',
                 appKey: 'hPhFiAi2vIj2OStCIi79waty',
-                notify: 'true',
-                verify: 'true',
-                avatar: 'happ_niko',
-                placeholder: '快写下你的想法与我互动',
+                notify: 'false',
+                verify: 'false',
+                avatar: 'niko',
+                placeholder: 'Leave your throughs behind~',
                 visitor: 'true',
                 path: path,
                 lang: language

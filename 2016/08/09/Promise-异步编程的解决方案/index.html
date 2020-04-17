@@ -25,8 +25,7 @@
 
 使用Promise
 
-{
-    // ES5 ,"> 
+1234567891011,"> 
     <meta name="author" content="niko"> 
     <link rel="alternative" href="atom.xml" title="niko" type="application/atom+xml"> 
     <link rel="icon" href="/img/logo_icon.png"> 
@@ -115,13 +114,13 @@
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    3.9k
+                    19k
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                    4 mins.
+                    18 mins.
                 </span>
                 
                 
@@ -170,163 +169,7 @@
 <blockquote>
 <p>使用Promise</p>
 </blockquote>
-<pre><code class="javascript">{
-    // ES5  回调解决异步   模拟ajax  
-  // 基本定义
-  let ajax=function(callback){
-    console.log(&#39;执行&#39;);
-    setTimeout(function () {
-      callback&amp;&amp;callback.call()
-    }, 1000);
-  };
-  ajax(function(){
-    console.log(&#39;timeout1&#39;);
-  })
-}
-
-{
-  let ajax=function(){
-    console.log(&#39;执行2&#39;);
-    return new Promise(function(resolve,reject){
-      // resolve:执行下一步操作   reject:终止操作
-      setTimeout(function () {
-        resolve()
-      }, 1000);
-    })
-  };
-
-  ajax().then(function(){
-    console.log(&#39;promise&#39;,&#39;timeout2&#39;);
-  })
-  // 执行步骤 ：
-  //    1.运行Ajax方法
-  //    2. 运行完之后返回一个Promise 实例，promise实例有resolve，reject方法
-}
-
-// 多个任务  
-
-{
-  let ajax=function(){
-    console.log(&#39;执行3&#39;);
-    return new Promise(function(resolve,reject){
-      setTimeout(function () {
-        resolve()
-      }, 1000);
-    })
-  };
-
-  ajax()
-    .then(function(){
-    return new Promise(function(resolve,reject){
-      setTimeout(function () {
-        resolve()
-      }, 2000);
-    });
-  })
-    .then(function(){
-    console.log(&#39;timeout3&#39;);
-  })
-}
-
-// 多个任务捕获
-{
-  let ajax=function(num){
-    console.log(&#39;执行4&#39;);
-    return new Promise(function(resolve,reject){
-      if(num&gt;5){
-        resolve();
-      }else{
-        throw new Error(&#39;出错了&#39;)
-      }
-    })
-  }
-
-  ajax(6).then(function(){
-    console.log(&#39;log&#39;,6);
-  }).catch(function(err){
-    console.log(&#39;catch&#39;,err);
-  });
-
-  ajax(3).then(function(){
-    console.log(&#39;log&#39;,3);
-  }).catch(function(err){
-    console.log(&#39;catch&#39;,err);
-  });
-}
-
-
-{
-  // 所有图片加载完 再添加到页面
-  function loadImg(src){
-    // 此promise实例做图片加载的动作
-    return new Promise((resolve,reject)=&gt;{
-      let img = document.createElement(&#39;img&#39;);
-      img.src = src ;
-      img.onload =function(){
-        resolve(img);
-      }
-      img.onerror=function(err){
-        reject(err);
-      }
-    })
-  }
-
-  function showImgs(imgs){
-    imgs.forEach(function(img){
-      document.body.appendChild(img);
-    })
-  }
-
-
-  // Promise.all表示把多个promise实例当做一个来用。当所有promise实例状态发生改变，新的promise实例才会发生变化
-
-  Promise.all([
-    loadImg(&#39;http://shape-app.oss-cn-beijing.aliyuncs.com/task_alarm/QMkieAh3Jj.png&#39;),
-    loadImg(&#39;http://shape-app.oss-cn-beijing.aliyuncs.com/activity_test/pAPrTzNMMF.jpg&#39;),
-    loadImg(&#39;http://shape-app.oss-cn-beijing.aliyuncs.com/activity_test/5kZ7fCeabd.jpg&#39;),
-    loadImg(&#39;http://shape-app.oss-cn-beijing.aliyuncs.com/activity_test/2QwsHcpWZG.jpg&#39;)
-  ]).then(showImgs)
-}
-
-
-{
-  // 场景：三张不同的图片，位于三个不同的位置，页面需要加载一张图片，不知道三张图片哪个返回快，不关心，但是有三个来源，加载一个就可以，先到先得，哪个回来哪个显示
-
-  // 有一个加载完就显示的到页面
-  function loadImg(src){
-    // 此promise实例做图片加载的动作
-    return new Promise((resolve,reject)=&gt;{
-      let img = document.createElement(&#39;img&#39;);
-      img.src = src ;
-      img.onload =function(){
-        resolve(img);
-      }
-      img.onerror=function(err){
-        reject(err);
-      }
-    })
-  }
-
-
-  function showImgs(img){
-    let p = document.createElement(&#39;p&#39;);
-    p.appendChild(img);
-    document.body.appendChild(p);
-  }
-
-
-
-  // Promise.race  只要数组中有一个状态改变，就会触发新的promise实例。其他就不改变了
-
-   Promise.race([
-    loadImg(&#39;http://shape-app.oss-cn-beijing.aliyuncs.com/task_alarm/QMkieAh3Jj.png&#39;),
-    loadImg(&#39;http://shape-app.oss-cn-beijing.aliyuncs.com/activity_test/pAPrTzNMMF.jpg&#39;),
-    loadImg(&#39;http://shape-app.oss-cn-beijing.aliyuncs.com/activity_test/5kZ7fCeabd.jpg&#39;),
-    loadImg(&#39;http://shape-app.oss-cn-beijing.aliyuncs.com/activity_test/2QwsHcpWZG.jpg&#39;)
-  ]).then(showImgs)
-
-
-}</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="comment">// ES5  回调解决异步   模拟ajax  </span></span><br><span class="line">  <span class="comment">// 基本定义</span></span><br><span class="line">  <span class="keyword">let</span> ajax=<span class="function"><span class="keyword">function</span>(<span class="params">callback</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'执行'</span>);</span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      callback&amp;&amp;callback.call()</span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line">  &#125;;</span><br><span class="line">  ajax(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'timeout1'</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">let</span> ajax=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'执行2'</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve,reject</span>)</span>&#123;</span><br><span class="line">      <span class="comment">// resolve:执行下一步操作   reject:终止操作</span></span><br><span class="line">      setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        resolve()</span><br><span class="line">      &#125;, <span class="number">1000</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  ajax().then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'promise'</span>,<span class="string">'timeout2'</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="comment">// 执行步骤 ：</span></span><br><span class="line">  <span class="comment">//    1.运行Ajax方法</span></span><br><span class="line">  <span class="comment">//    2. 运行完之后返回一个Promise 实例，promise实例有resolve，reject方法</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 多个任务  </span></span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">let</span> ajax=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'执行3'</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve,reject</span>)</span>&#123;</span><br><span class="line">      setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        resolve()</span><br><span class="line">      &#125;, <span class="number">1000</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  ajax()</span><br><span class="line">    .then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve,reject</span>)</span>&#123;</span><br><span class="line">      setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        resolve()</span><br><span class="line">      &#125;, <span class="number">2000</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;)</span><br><span class="line">    .then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'timeout3'</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 多个任务捕获</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">let</span> ajax=<span class="function"><span class="keyword">function</span>(<span class="params">num</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'执行4'</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve,reject</span>)</span>&#123;</span><br><span class="line">      <span class="keyword">if</span>(num&gt;<span class="number">5</span>)&#123;</span><br><span class="line">        resolve();</span><br><span class="line">      &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'出错了'</span>)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  ajax(<span class="number">6</span>).then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'log'</span>,<span class="number">6</span>);</span><br><span class="line">  &#125;).catch(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'catch'</span>,err);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  ajax(<span class="number">3</span>).then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'log'</span>,<span class="number">3</span>);</span><br><span class="line">  &#125;).catch(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'catch'</span>,err);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">// 所有图片加载完 再添加到页面</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">loadImg</span>(<span class="params">src</span>)</span>&#123;</span><br><span class="line">    <span class="comment">// 此promise实例做图片加载的动作</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve,reject</span>)=&gt;</span>&#123;</span><br><span class="line">      <span class="keyword">let</span> img = <span class="built_in">document</span>.createElement(<span class="string">'img'</span>);</span><br><span class="line">      img.src = src ;</span><br><span class="line">      img.onload =<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        resolve(img);</span><br><span class="line">      &#125;</span><br><span class="line">      img.onerror=<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">        reject(err);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">showImgs</span>(<span class="params">imgs</span>)</span>&#123;</span><br><span class="line">    imgs.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">img</span>)</span>&#123;</span><br><span class="line">      <span class="built_in">document</span>.body.appendChild(img);</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="comment">// Promise.all表示把多个promise实例当做一个来用。当所有promise实例状态发生改变，新的promise实例才会发生变化</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">Promise</span>.all([</span><br><span class="line">    loadImg(<span class="string">'http://shape-app.oss-cn-beijing.aliyuncs.com/task_alarm/QMkieAh3Jj.png'</span>),</span><br><span class="line">    loadImg(<span class="string">'http://shape-app.oss-cn-beijing.aliyuncs.com/activity_test/pAPrTzNMMF.jpg'</span>),</span><br><span class="line">    loadImg(<span class="string">'http://shape-app.oss-cn-beijing.aliyuncs.com/activity_test/5kZ7fCeabd.jpg'</span>),</span><br><span class="line">    loadImg(<span class="string">'http://shape-app.oss-cn-beijing.aliyuncs.com/activity_test/2QwsHcpWZG.jpg'</span>)</span><br><span class="line">  ]).then(showImgs)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">// 场景：三张不同的图片，位于三个不同的位置，页面需要加载一张图片，不知道三张图片哪个返回快，不关心，但是有三个来源，加载一个就可以，先到先得，哪个回来哪个显示</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 有一个加载完就显示的到页面</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">loadImg</span>(<span class="params">src</span>)</span>&#123;</span><br><span class="line">    <span class="comment">// 此promise实例做图片加载的动作</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve,reject</span>)=&gt;</span>&#123;</span><br><span class="line">      <span class="keyword">let</span> img = <span class="built_in">document</span>.createElement(<span class="string">'img'</span>);</span><br><span class="line">      img.src = src ;</span><br><span class="line">      img.onload =<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        resolve(img);</span><br><span class="line">      &#125;</span><br><span class="line">      img.onerror=<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">        reject(err);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">showImgs</span>(<span class="params">img</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> p = <span class="built_in">document</span>.createElement(<span class="string">'p'</span>);</span><br><span class="line">    p.appendChild(img);</span><br><span class="line">    <span class="built_in">document</span>.body.appendChild(p);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="comment">// Promise.race  只要数组中有一个状态改变，就会触发新的promise实例。其他就不改变了</span></span><br><span class="line"></span><br><span class="line">   <span class="built_in">Promise</span>.race([</span><br><span class="line">    loadImg(<span class="string">'http://shape-app.oss-cn-beijing.aliyuncs.com/task_alarm/QMkieAh3Jj.png'</span>),</span><br><span class="line">    loadImg(<span class="string">'http://shape-app.oss-cn-beijing.aliyuncs.com/activity_test/pAPrTzNMMF.jpg'</span>),</span><br><span class="line">    loadImg(<span class="string">'http://shape-app.oss-cn-beijing.aliyuncs.com/activity_test/5kZ7fCeabd.jpg'</span>),</span><br><span class="line">    loadImg(<span class="string">'http://shape-app.oss-cn-beijing.aliyuncs.com/activity_test/2QwsHcpWZG.jpg'</span>)</span><br><span class="line">  ]).then(showImgs)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls"
@@ -350,7 +193,7 @@
         <div class="sidebar">
             <div class="box animated fadeInRight">
                 <div class="subbox">
-                    <img src="https://res.cloudinary.com/tridiamond/image/upload/v1573019751/TriDiamond_logo_ui_xeublz.jpg" height=300 width=300></img>
+                    <img src="/img/logo_icon.png" height=300 width=300></img>
                     <p>niko</p>
                     <span>Think like an artist, develop like an artisan</span>
                     <dl>
@@ -636,10 +479,10 @@
                 el: '#vcomments',
                 appId: 'h0Nbcp32WtIpnnHaGTLWbtKo-gzGzoHsz',
                 appKey: 'hPhFiAi2vIj2OStCIi79waty',
-                notify: 'true',
-                verify: 'true',
-                avatar: 'happ_niko',
-                placeholder: '快写下你的想法与我互动',
+                notify: 'false',
+                verify: 'false',
+                avatar: 'niko',
+                placeholder: 'Leave your throughs behind~',
                 visitor: 'true',
                 path: path,
                 lang: language

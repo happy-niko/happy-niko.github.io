@@ -59,7 +59,7 @@
             <div class="main">
                 <div class="content animated fadeIn">
                     <div class="set">
-                        <h1 style="text-align: center">一路走来</h1>
+                        <h1 style="text-align: center">Archived</h1>
                         <p style="text-align: center">「 20 」</p>
                         <ul class="timeline timeline-centered">
                             
@@ -127,7 +127,7 @@
                                     <div class="timeline-content">
                                         <a class="timeline-title" target="_self" href="/2018/03/06/Css3%E5%AE%9E%E7%8E%B0%E8%83%8C%E6%99%AF%E6%AF%9B%E7%8E%BB%E7%92%83%E6%95%88%E6%9E%9C/">Css3实现背景毛玻璃效果</a>
                                         <p>
-                                            先上代码let asdasd
+                                            先上代码1let asdasd
 
                                         </p>
                                     </div>
@@ -198,9 +198,7 @@
 
 当一个 Vue 实例被创建时，它向 Vue 的响应式系统中加入了其 data 对象中能找到的所有的属性。当这些属性的值发生改变时，视图将会产生“响应”，即匹配更新为新的值。当这些数据改变时，视图会进行重渲染。
 
-// 我们的数据对象
-var data = { a: 1 }
-// 该对象被加入到一个 V...
+1234567891011121314// 我们的数据对象var data = &#123...
                                         </p>
                                     </div>
                                 </li>
@@ -270,13 +268,9 @@ Date.prototype.format = function (fmt) {
                                             工具方法：
 
 angular.bind(obj1,obj) —改变this指向 参数方法: obj1: 改变后this指向的对象  obj: 被改变的对象  
- function show (){
-     alert(this);
- }
- show();
- angular.bind(document,show)();  //改变this指向  
+ 12345function show ()&#123;	alert(this);&#125;show();angular.bind(document,show)();  //改变this指向
 
-angular.extend(a,b) —...
+angular.extend(a,b)...
                                         </p>
                                     </div>
                                 </li>
@@ -332,14 +326,7 @@ let特性
 1. 不可以重复申明
 2. 没有预解析过程（即变量声明提前）
 3. 块级作用域 ：一个变量或者函数只有在该区域才起作用
-    ````javascript
-     { //块级作用域
-        let a = 1;
-        console.log(a)
-     }
-
- //举个例子：for循环依次输出 0~10
- for(var i...
+    12345678910111213141516171819202122232425 &#123; //块级作用域	let a = 1;	console.log(a) &#125; //举个例子：for循环依次输出 0~10 f...
                                         </p>
                                     </div>
                                 </li>
@@ -406,9 +393,7 @@ Symbol类型是es6新增的一个数据类型,Es5的基本数据类型（undefin
 简介：修饰器是一个函数，用于修饰类的行为（修改 扩展类的功能，修饰器只在类的范围使用）。
 
  需安装：npm install babel-plugin-transform-decorators-legacy –save-dev
-1.限制某个属性 是只读的{
-     let readonly = function(target,name,descriptor){
-         // t...
+1.限制某个属性 是只读的1234567891011121314151617181920212223242526&#123; 	let readonly = fun...
                                         </p>
                                     </div>
                                 </li>
@@ -438,17 +423,7 @@ Symbol类型是es6新增的一个数据类型,Es5的基本数据类型（undefin
 
 语法
 
-// A文件
-// 作为一个模块   1.导出变量  2.导出函数  3.类暴露出去
-
-//第一种写法
-export let A = 123 ;
-export function test(argument) {
-    // body...
-    console.log(&#39;test&#39;) ;
-}
-
-export class Hello{...
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253// A文件// 作为一个模块   1.导出变量  2.导出函数  3.类暴露出去//第一种写法export let A = 123 ;export funct...
                                         </p>
                                     </div>
                                 </li>
@@ -498,10 +473,7 @@ for ...
 
 基本用法：
 
-{
-    // Generator 基本用法
-    let tell=function* (){
-    yield &#39;a&#39;...
+12345678910111213141516&#123;	// Generator 基本用法	let tell=function* ()&#1...
                                         </p>
                                     </div>
                                 </li>
@@ -516,12 +488,7 @@ for ...
                                         <a class="timeline-title" target="_self" href="/2016/08/18/Object.assign/">Object.assign</a>
                                         <p>
                                             Es5中实现
-    //对象assign 方法
-var createAssigner = function(keysFunc,defaults){
-  return function(obj){
-    var length = arguments.lenth;
-    if(defaults) obj = Object(obj);
-    if(length&lt;2||obj==nul...
+1234567891011121314151617181920212223242526	//对象assign 方法var createAssigner = function(keysFunc,defaults)&#123;  return function(obj)&#123;    var length = arguments.lenth;    if(defaults) o...
                                         </p>
                                     </div>
                                 </li>
@@ -550,12 +517,7 @@ var createAssigner = function(keysFunc,defaults){
 
 使用Promise
 
-{
-    // ES5  回调解决异步   模拟ajax  
-  // 基本定义
-  let ajax=function(callback){
-    console.log(&#39;执行&#39;);
-    set...
+123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960...
                                         </p>
                                     </div>
                                 </li>
@@ -593,10 +555,7 @@ Css Sprite
 
 icomoon.io字体引入
 
-font-face
-  font-family: &#39;music-icon&#39;
-  src: url(&#39;../fonts/music-icon.eot?2qevqt&#39;)
-  src: url(&#39;../fonts/music-icon.eot?2qevqt...
+12345678910111213141516171819202122232425font-face  font-family: 'music-icon'  src: url('../fonts/music-icon.eot?2qevqt')  src: url('../fonts/mus...
                                         </p>
                                     </div>
                                 </li>
@@ -621,11 +580,7 @@ font-face
                                             
 数组比较
 方法 1：
-
-JSON.stringify(a1) == JSON.stringify(a2)
-//或者
-a1.toString() == a2.toString()
-
+1234JSON.stringify(a1) == JSON.stringify(a2)//或者a1.toString() == a2.toString()
 
 
 
@@ -900,10 +855,10 @@ a1.toString() == a2.toString()
                 el: '#vcomments',
                 appId: 'h0Nbcp32WtIpnnHaGTLWbtKo-gzGzoHsz',
                 appKey: 'hPhFiAi2vIj2OStCIi79waty',
-                notify: 'true',
-                verify: 'true',
-                avatar: 'happ_niko',
-                placeholder: '快写下你的想法与我互动',
+                notify: 'false',
+                verify: 'false',
+                avatar: 'niko',
+                placeholder: 'Leave your throughs behind~',
                 visitor: 'true',
                 path: path,
                 lang: language

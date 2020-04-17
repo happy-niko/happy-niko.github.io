@@ -180,9 +180,7 @@
 <p>2、 万金油 weinre + 真机</p>
 </blockquote>
 <h4 id="调试任意浏览器的H5页面以及webview页面"><a href="#调试任意浏览器的H5页面以及webview页面" class="headerlink" title="调试任意浏览器的H5页面以及webview页面"></a>调试任意浏览器的H5页面以及webview页面</h4><p>使用场景：有些时候样式在桌面chrome模拟是好的，但是在部分webview或者真机上就有问题。</p>
-<h4 id="第一步：npm-install-g-weinre"><a href="#第一步：npm-install-g-weinre" class="headerlink" title=". 第一步：npm install -g weinre"></a>. 第一步：npm install -g weinre</h4><h4 id="第二步：weinre-–boundHost-xx-ip"><a href="#第二步：weinre-–boundHost-xx-ip" class="headerlink" title=". 第二步：weinre –boundHost xx ip"></a>. 第二步：weinre –boundHost xx ip</h4><h4 id="类似于weinre-–boundHost-172-16-28-162"><a href="#类似于weinre-–boundHost-172-16-28-162" class="headerlink" title=". 类似于weinre –boundHost 172.16.28.162"></a>. 类似于weinre –boundHost 172.16.28.162</h4><h4 id="第三步：此时weinre会返回一个可用的地址"><a href="#第三步：此时weinre会返回一个可用的地址" class="headerlink" title=". 第三步：此时weinre会返回一个可用的地址"></a>. 第三步：此时weinre会返回一个可用的地址</h4><pre><code class="javscript">
-2015-12-14T03:58:50.349Z weinre: starting server at http://10.1.2.77:8080
-</code></pre>
+<h4 id="第一步：npm-install-g-weinre"><a href="#第一步：npm-install-g-weinre" class="headerlink" title=". 第一步：npm install -g weinre"></a>. 第一步：npm install -g weinre</h4><h4 id="第二步：weinre-–boundHost-xx-ip"><a href="#第二步：weinre-–boundHost-xx-ip" class="headerlink" title=". 第二步：weinre –boundHost xx ip"></a>. 第二步：weinre –boundHost xx ip</h4><h4 id="类似于weinre-–boundHost-172-16-28-162"><a href="#类似于weinre-–boundHost-172-16-28-162" class="headerlink" title=". 类似于weinre –boundHost 172.16.28.162"></a>. 类似于weinre –boundHost 172.16.28.162</h4><h4 id="第三步：此时weinre会返回一个可用的地址"><a href="#第三步：此时weinre会返回一个可用的地址" class="headerlink" title=". 第三步：此时weinre会返回一个可用的地址"></a>. 第三步：此时weinre会返回一个可用的地址</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">2015-12-14T03:58:50.349Z weinre: starting server at http:&#x2F;&#x2F;10.1.2.77:8080</span><br></pre></td></tr></table></figure>
 <p>也可以指定端口号</p>
 <h4 id="weinre-httpPort-8081-boundHost-172-16-28-162"><a href="#weinre-httpPort-8081-boundHost-172-16-28-162" class="headerlink" title="weinre --httpPort 8081 --boundHost 172.16.28.162"></a><code>weinre --httpPort 8081 --boundHost 172.16.28.162</code></h4><h4 id="第四步：可以访问之前weinre分配过来的地址，进入后在页面最上部分可以看到-Access-Points-下的-debug-client-user-interface-http-10-1-2-77-8080-client-anonymous"><a href="#第四步：可以访问之前weinre分配过来的地址，进入后在页面最上部分可以看到-Access-Points-下的-debug-client-user-interface-http-10-1-2-77-8080-client-anonymous" class="headerlink" title=". 第四步：可以访问之前weinre分配过来的地址，进入后在页面最上部分可以看到 Access Points 下的 debug client user interface http://10.1.2.77:8080/client/#anonymous"></a>. 第四步：可以访问之前weinre分配过来的地址，进入后在页面最上部分可以看到 <code>Access Points</code> 下的 <code>debug client user interface http://10.1.2.77:8080/client/#anonymous</code></h4><p><img src="http://cdn1.showjoy.com/images/9a/9a259c3bbf5d438399842c11d53054c9.png" alt="效果"></p>
 <p>这是之后要点击的链接 ，我们先往当前网页下方看。可以看到 <code>Target Script</code>栏目</p>
@@ -276,7 +274,7 @@
         <div class="sidebar">
             <div class="box animated fadeInRight">
                 <div class="subbox">
-                    <img src="https://res.cloudinary.com/tridiamond/image/upload/v1573019751/TriDiamond_logo_ui_xeublz.jpg" height=300 width=300></img>
+                    <img src="/img/logo_icon.png" height=300 width=300></img>
                     <p>niko</p>
                     <span>Think like an artist, develop like an artisan</span>
                     <dl>
@@ -569,10 +567,10 @@
                 el: '#vcomments',
                 appId: 'h0Nbcp32WtIpnnHaGTLWbtKo-gzGzoHsz',
                 appKey: 'hPhFiAi2vIj2OStCIi79waty',
-                notify: 'true',
-                verify: 'true',
-                avatar: 'happ_niko',
-                placeholder: '快写下你的想法与我互动',
+                notify: 'false',
+                verify: 'false',
+                avatar: 'niko',
+                placeholder: 'Leave your throughs behind~',
                 visitor: 'true',
                 path: path,
                 lang: language
