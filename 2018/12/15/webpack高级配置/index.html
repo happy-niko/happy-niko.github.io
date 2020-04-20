@@ -107,13 +107,13 @@ module.export = {
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    1.4k
+                    6.3k
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                    1 mins.
+                    6 mins.
                 </span>
                 
                 
@@ -189,6 +189,156 @@ module.export = {
     // publicPath: &#39;http://cdn.abc.com&#39;  // 修改所有静态文件 url 的前缀（如 cdn 域名），这里暂时用不到
   },
 })</code></pre>
+<h3 id="抽离-CSS"><a href="#抽离-CSS" class="headerlink" title="抽离 CSS"></a>抽离 CSS</h3><p><code>mini-css-extract-plugin</code> 插件</p>
+<p>webpack.commom.js</p>
+<pre><code class="javascript">module: {
+        rules: [
+            {
+                test: /\.js$/,
+                loader: [&#39;babel-loader&#39;],
+                include: srcPath,
+                exclude: /node_modules/
+            }
+            // css 处理
+        ]
+},</code></pre>
+<p>webpack.dev.js 中 (less-loader— &gt; css-loader —-&gt;style–loader)</p>
+<pre><code class="javascript">module: {
+        rules: [
+            // 直接引入图片 url
+            {
+                test: /\.(png|jpg|jpeg|gif)$/,
+                use: &#39;file-loader&#39;
+            },
+            // {
+            //     test: /\.css$/,
+            //     // loader 的执行顺序是：从后往前
+            //     loader: [&#39;style-loader&#39;, &#39;css-loader&#39;]
+            // },
+            {
+                test: /\.css$/,
+                // loader 的执行顺序是：从后往前
+                loader: [&#39;style-loader&#39;, &#39;css-loader&#39;, &#39;postcss-loader&#39;] // 加了 postcss
+            },
+            {
+                test: /\.less$/,
+                // 增加 &#39;less-loader&#39; ，注意顺序
+                loader: [&#39;style-loader&#39;, &#39;css-loader&#39;, &#39;less-loader&#39;]
+            }
+        ]
+    },
+</code></pre>
+<p>webpack.prod.js</p>
+<pre><code class="javascript">
+const MiniCssExtractPlugin = require(&#39;mini-css-extract-plugin&#39;)
+
+
+// 压缩css
+const TerserJSPlugin = require(&#39;terser-webpack-plugin&#39;)
+const OptimizeCSSAssetsPlugin = require(&#39;optimize-css-assets-webpack-plugin&#39;)
+
+ // 抽离 css
+            {
+                test: /\.css$/,
+                loader: [
+                    MiniCssExtractPlugin.loader,  // 注意，这里不再用 style-loader
+                    &#39;css-loader&#39;,
+                    &#39;postcss-loader&#39;
+                ]
+            },
+            // 抽离 less --&gt; css
+            {
+                test: /\.less$/,
+                loader: [
+                    MiniCssExtractPlugin.loader,  // 注意，这里不再用 style-loader
+                    &#39;css-loader&#39;,
+                    &#39;less-loader&#39;,
+                    &#39;postcss-loader&#39;
+                ]
+            }
+
+// plugins 增加抽离css 文件的处理
+
+ plugins: [
+        new CleanWebpackPlugin(), // 会默认清空 output.path 文件夹
+        new webpack.DefinePlugin({
+            // window.ENV = &#39;production&#39;
+            ENV: JSON.stringify(&#39;production&#39;)
+        }),
+
+        // 抽离 css 文件
+        new MiniCssExtractPlugin({
+            filename: &#39;css/main.[contentHash:8].css&#39;
+        })
+    ],
+
+ optimization: {
+        // 压缩 css
+        minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
+    }
+</code></pre>
+<h3 id="抽离公共代码-和-第三方代码"><a href="#抽离公共代码-和-第三方代码" class="headerlink" title="抽离公共代码 和 第三方代码"></a>抽离公共代码 和 第三方代码</h3><p>splitChunks</p>
+<p>webpack.common.js</p>
+<pre><code class="javascript">plugins: [
+  // new HtmlWebpackPlugin({
+  //     template: path.join(srcPath, &#39;index.html&#39;),
+  //     filename: &#39;index.html&#39;
+  // })
+
+  // 多入口 - 生成 index.html
+  new HtmlWebpackPlugin({
+    template: path.join(srcPath, &#39;index.html&#39;),
+    filename: &#39;index.html&#39;,
+    // chunks 表示该页面要引用哪些 chunk （即上面的 index 和 other），默认全部引用
+    chunks: [&#39;index&#39;, &#39;vendor&#39;, &#39;common&#39;], // 要考虑代码分割
+  }),
+  // 多入口 - 生成 other.html
+  new HtmlWebpackPlugin({
+    template: path.join(srcPath, &#39;other.html&#39;),
+    filename: &#39;other.html&#39;,
+    chunks: [&#39;other&#39;, &#39;common&#39;], // 考虑代码分割
+  }),
+]</code></pre>
+<p>webpack.prod.js</p>
+<pre><code class="javascript">optimization: {
+        // 压缩 css
+        minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
+
+        // 分割代码块
+        splitChunks: {
+            chunks: &#39;all&#39;,
+            /**
+             * initial 入口 chunk，对于异步导入的文件不处理
+                async 异步 chunk，只对异步导入的文件处理
+                all 全部 chunk
+             */
+
+            // 缓存分组
+            cacheGroups: {
+                // 第三方模块
+                vendor: {
+                    name: &#39;vendor&#39;, // chunk 名称
+                    priority: 1, // 如果第三方模块，和公共模块都是被各个地方引用，权限更高，优先抽离，重要！！！
+                    test: /node_modules/,// 模块路径
+                    minSize: 0,  // 大小限制
+                    minChunks: 1  // 最少复用过几次
+                },
+
+                // 公共的模块
+                common: {
+                    name: &#39;common&#39;, // chunk 名称
+                    priority: 0, // 优先级
+                    minSize: 0,  // 公共模块的大小限制
+                    minChunks: 2  // 公共模块最少复用过几次
+                }
+            }
+        }
+    }</code></pre>
+<h3 id="懒加载"><a href="#懒加载" class="headerlink" title="懒加载"></a>懒加载</h3><pre><code class="javascript">setTimeout(() =&gt; {
+  import(&#39;xxx.js&#39;).then((res) =&gt; {
+    console.log(res.default.message)
+  })
+})</code></pre>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls"
@@ -225,7 +375,7 @@ module.export = {
                     </dl>
                 </div>
                 <ul>
-                    <li><a href="/">23 <p>文章</p></a></li>
+                    <li><a href="/">24 <p>文章</p></a></li>
                     <li><a href="/categories">10 <p>分类</p></a></li>
                     <li><a href="/tags">12 <p>标签</p></a></li>
                 </ul>
@@ -236,7 +386,7 @@ module.export = {
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>目录</h4>
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#多入口配置"><span class="toc-number">1.</span> <span class="toc-text">多入口配置</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#多入口配置"><span class="toc-number">1.</span> <span class="toc-text">多入口配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#抽离-CSS"><span class="toc-number">2.</span> <span class="toc-text">抽离 CSS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#抽离公共代码-和-第三方代码"><span class="toc-number">3.</span> <span class="toc-text">抽离公共代码 和 第三方代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#懒加载"><span class="toc-number">4.</span> <span class="toc-text">懒加载</span></a></li></ol>
                 </div>
             </div>
             
