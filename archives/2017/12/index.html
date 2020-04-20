@@ -60,7 +60,7 @@
                 <div class="content animated fadeIn">
                     <div class="set">
                         <h1 style="text-align: center">Archived</h1>
-                        <p style="text-align: center">「 24 」</p>
+                        <p style="text-align: center">「 25 」</p>
                         <ul class="timeline timeline-centered">
                             
                             
@@ -72,6 +72,28 @@
                                         <h2 class="timeline-title">三月 2019</h2>
                                     </div>
                                 </li>
+                                
+                                <li class="timeline-item">
+                                    <div class="timeline-info">
+                                        <span class="gradient-text">三月 16, 2019</span>
+                                    </div>
+                                    <div class="timeline-marker"></div>
+                                    <div class="timeline-content">
+                                        <a class="timeline-title" target="_self" href="/2019/03/16/webpack%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B9%8B%E4%BA%A7%E5%87%BA%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96/">webpack性能优化之产出代码优化</a>
+                                        <p>
+                                            图片小于 xxk 进行 base64 减少请求rules: [
+  // 图片 - 考虑 base64 编码的情况
+  {
+    test: /\.(png|jpg|jpeg|gif)$/,
+    use: {
+      loader: &#39;url-loader&#39;,
+      options: {
+        // 小于 5kb 的图片用 base64 格式产出
+ ...
+                                        </p>
+                                    </div>
+                                </li>
+                            
                                 
                                 <li class="timeline-item">
                                     <div class="timeline-info">
@@ -132,12 +154,11 @@ module.export = {
                                     </div>
                                     <div class="timeline-marker"></div>
                                     <div class="timeline-content">
-                                        <a class="timeline-title" target="_self" href="/2018/12/14/webpac%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/">webpack 基本配置</a>
+                                        <a class="timeline-title" target="_self" href="/2018/12/14/BFC/">BFC 是什么？</a>
                                         <p>
-                                            首先 公共 webpack.common.js 和 webpack.dev.js webpack.prod.js 通过 webpack-merge (smart) 去做拆分webpack 一切皆模块 ，配置 css loader 需要将 css 单独摘出来
-webpack.commom.js
-const path = require(&#39;path&#39;)
-const HtmlWeb...
+                                            BFC 即块级格式化上下文 ，它是只元素 通过触发 BFC ，形成一个封闭的上下文，可以用来包住浮动元素（不是清除浮动哟）。就算子元素再怎么折腾，也不会影响外部元素了
+display: flow-root 这个属性的功能就一个：触发 BFC
+float 的值不为 none。overflow 的值为 auto,scroll 或 hidden。display 的值为 table-cell, ta...
                                         </p>
                                     </div>
                                 </li>
@@ -149,11 +170,12 @@ const HtmlWeb...
                                     </div>
                                     <div class="timeline-marker"></div>
                                     <div class="timeline-content">
-                                        <a class="timeline-title" target="_self" href="/2018/12/14/BFC/">BFC 是什么？</a>
+                                        <a class="timeline-title" target="_self" href="/2018/12/14/webpac%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/">webpack 基本配置</a>
                                         <p>
-                                            BFC 即块级格式化上下文 ，它是只元素 通过触发 BFC ，形成一个封闭的上下文，可以用来包住浮动元素（不是清除浮动哟）。就算子元素再怎么折腾，也不会影响外部元素了
-display: flow-root 这个属性的功能就一个：触发 BFC
-float 的值不为 none。overflow 的值为 auto,scroll 或 hidden。display 的值为 table-cell, ta...
+                                            首先 公共 webpack.common.js 和 webpack.dev.js webpack.prod.js 通过 webpack-merge (smart) 去做拆分webpack 一切皆模块 ，配置 css loader 需要将 css 单独摘出来
+webpack.commom.js
+const path = require(&#39;path&#39;)
+const HtmlWeb...
                                         </p>
                                     </div>
                                 </li>

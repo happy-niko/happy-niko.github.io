@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>webpack性能优化之产出代码优化</title>
+      <link href="/2019/03/16/webpack%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B9%8B%E4%BA%A7%E5%87%BA%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96/"/>
+      <url>/2019/03/16/webpack%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B9%8B%E4%BA%A7%E5%87%BA%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96/</url>
+      
+        <content type="html"><![CDATA[<h3 id="图片小于-xxk-进行-base64-减少请求"><a href="#图片小于-xxk-进行-base64-减少请求" class="headerlink" title="图片小于 xxk 进行 base64 减少请求"></a>图片小于 xxk 进行 base64 减少请求</h3><pre><code class="javascript">rules: [  // 图片 - 考虑 base64 编码的情况  {    test: /\.(png|jpg|jpeg|gif)$/,    use: {      loader: &#39;url-loader&#39;,      options: {        // 小于 5kb 的图片用 base64 格式产出        // 否则，依然延用 file-loader 的形式，产出 url 格式        limit: 5 * 1024,        // 打包到 img 目录下        outputPath: &#39;/img1/&#39;,        // 设置图片的 cdn 地址（也可以统一在外面的 output 中设置，那将作用于所有静态资源）        // publicPath: &#39;http://cdn.abc.com&#39;      },    },  },]</code></pre><h3 id="bundle-加-hash"><a href="#bundle-加-hash" class="headerlink" title="bundle 加 hash"></a>bundle 加 hash</h3><pre><code class="javascript"> output: {        filename: &#39;bundle.[contentHash:8].js&#39;,  // 打包代码时，加上 hash 戳        path: distPath,        // publicPath: &#39;http://cdn.abc.com&#39;  // 修改所有静态文件 url 的前缀（如 cdn 域名），这里暂时用不到    },</code></pre><h3 id="import-then-懒加载"><a href="#import-then-懒加载" class="headerlink" title="import.then 懒加载"></a>import.then 懒加载</h3><h3 id="提取公共代码"><a href="#提取公共代码" class="headerlink" title="提取公共代码"></a>提取公共代码</h3><pre><code class="javascript">    // 分割代码块        splitChunks: {            chunks: &#39;all&#39;,            /**             * initial 入口 chunk，对于异步导入的文件不处理                async 异步 chunk，只对异步导入的文件处理                all 全部 chunk             */            // 缓存分组            cacheGroups: {                // 第三方模块                vendor: {                    name: &#39;vendor&#39;, // chunk 名称                    priority: 1, // 权限更高，优先抽离，重要！！！                    test: /node_modules/,                    minSize: 0,  // 大小限制                    minChunks: 1  // 最少复用过几次                },                // 公共的模块                common: {                    name: &#39;common&#39;, // chunk 名称                    priority: 0, // 优先级                    minSize: 0,  // 公共模块的大小限制                    minChunks: 2  // 公共模块最少复用过几次                }            }        }</code></pre><h3 id="ignorePlugin-打包忽略某些文件，体积更小"><a href="#ignorePlugin-打包忽略某些文件，体积更小" class="headerlink" title="ignorePlugin 打包忽略某些文件，体积更小"></a>ignorePlugin 打包忽略某些文件，体积更小</h3><h3 id="使用-cdn-加速，给所有文件增加前缀"><a href="#使用-cdn-加速，给所有文件增加前缀" class="headerlink" title="使用 cdn 加速，给所有文件增加前缀"></a>使用 cdn 加速，给所有文件增加前缀</h3><pre><code class="javascript">output: {  filename: path: pulicPath: &#39;http:cdn.abc.com&#39; // 修改所有静态文件前缀}</code></pre><h3 id="使用-production"><a href="#使用-production" class="headerlink" title="使用 production"></a>使用 production</h3><ul><li>自动开启代码压缩</li><li>vue react 等会自动删掉调试代码</li><li>自动启用 tree-shaking (没用到的函数就不加载),必须用 Es6 moudle 才能让 tree-shaking 生效</li></ul><h3 id="Scope-Hosting（让多个函数作用域合并为一个"><a href="#Scope-Hosting（让多个函数作用域合并为一个" class="headerlink" title="Scope Hosting（让多个函数作用域合并为一个)"></a>Scope Hosting（让多个函数作用域合并为一个)</h3>]]></content>
+      
+      
+      <categories>
+          
+          <category> webpack </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 工具 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>webpack优化之打包构建速度开发体验和效率</title>
       <link href="/2019/03/15/webpack%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B9%8B%E6%89%93%E5%8C%85%E9%80%9F%E5%BA%A6/"/>
       <url>/2019/03/15/webpack%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B9%8B%E6%89%93%E5%8C%85%E9%80%9F%E5%BA%A6/</url>
@@ -54,6 +79,25 @@
     
     
     <entry>
+      <title>BFC 是什么？</title>
+      <link href="/2018/12/14/BFC/"/>
+      <url>/2018/12/14/BFC/</url>
+      
+        <content type="html"><![CDATA[<p>BFC 即块级格式化上下文 ，它是只元素 通过触发 BFC ，形成一个封闭的上下文，可以用来包住浮动元素（不是清除浮动哟）。就算子元素再怎么折腾，也不会影响外部元素了</p><p>display: flow-root 这个属性的功能就一个：触发 BFC</p><p>float 的值不为 none。<br>overflow 的值为 auto,scroll 或 hidden。<br>display 的值为 table-cell, table-caption, inline-block 中的任何一个。<br>position 的值不为 relative 和 static。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> CSS </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>webpack 基本配置</title>
       <link href="/2018/12/14/webpac%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/"/>
       <url>/2018/12/14/webpac%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/</url>
@@ -73,25 +117,6 @@
             <tag> 工具 </tag>
             
         </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>BFC 是什么？</title>
-      <link href="/2018/12/14/BFC/"/>
-      <url>/2018/12/14/BFC/</url>
-      
-        <content type="html"><![CDATA[<p>BFC 即块级格式化上下文 ，它是只元素 通过触发 BFC ，形成一个封闭的上下文，可以用来包住浮动元素（不是清除浮动哟）。就算子元素再怎么折腾，也不会影响外部元素了</p><p>display: flow-root 这个属性的功能就一个：触发 BFC</p><p>float 的值不为 none。<br>overflow 的值为 auto,scroll 或 hidden。<br>display 的值为 table-cell, table-caption, inline-block 中的任何一个。<br>position 的值不为 relative 和 static。</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> CSS </category>
-          
-      </categories>
-      
       
     </entry>
     
