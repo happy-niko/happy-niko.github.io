@@ -225,15 +225,13 @@ float 的值不为 none。overflow 的值为 auto,scroll 或 hidden。display �
                                     </div>
                                     <div class="timeline-marker"></div>
                                     <div class="timeline-content">
-                                        <a class="timeline-title" target="_self" href="/2018/07/14/%E9%97%AD%E5%8C%85%E5%AE%9E%E7%8E%B0%E5%80%92%E8%AE%A1%E6%97%B6%E7%A8%8B%E5%BA%8F/">闭包实现倒计时程序</a>
+                                        <a class="timeline-title" target="_self" href="/2018/07/14/debounce&&throttle/">函数的防抖和节流</a>
                                         <p>
-                                            话不多说直接贴代码var dj = (function() {
-            return {
-                time: function() {
-                    // setTimeout 内部this 指向
-                    var This = this;
+                                            
+在前端开发的过程中，我们经常会需要绑定一些持续触发的事件，如 resize、scroll、mousemove 等等，但有些时候我们并不希望在事件持续触发的过程中那么频繁地去执行函数。通常这种情况下我们怎么去解决的呢？一般来讲，防抖和节流是比较好的解决方案。
 
-                    if (Thi...
+防抖防抖即将多次操作合并一次执行，若持续触发 计时器清零 ，按照最后一个 操作去做
+function debounce(fn, de...
                                         </p>
                                     </div>
                                 </li>
@@ -245,13 +243,15 @@ float 的值不为 none。overflow 的值为 auto,scroll 或 hidden。display �
                                     </div>
                                     <div class="timeline-marker"></div>
                                     <div class="timeline-content">
-                                        <a class="timeline-title" target="_self" href="/2018/07/14/debounce&&throttle/">函数的防抖和节流</a>
+                                        <a class="timeline-title" target="_self" href="/2018/07/14/%E9%97%AD%E5%8C%85%E5%AE%9E%E7%8E%B0%E5%80%92%E8%AE%A1%E6%97%B6%E7%A8%8B%E5%BA%8F/">闭包实现倒计时程序</a>
                                         <p>
-                                            
-在前端开发的过程中，我们经常会需要绑定一些持续触发的事件，如 resize、scroll、mousemove 等等，但有些时候我们并不希望在事件持续触发的过程中那么频繁地去执行函数。通常这种情况下我们怎么去解决的呢？一般来讲，防抖和节流是比较好的解决方案。
+                                            话不多说直接贴代码var dj = (function() {
+            return {
+                time: function() {
+                    // setTimeout 内部this 指向
+                    var This = this;
 
-防抖防抖即将多次操作合并一次执行，若持续触发 计时器清零 ，按照最后一个 操作去做
-function debounce(fn, de...
+                    if (Thi...
                                         </p>
                                     </div>
                                 </li>
