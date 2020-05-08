@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>彻彻底底搞明白，什么是宏任务，什么是微任务，什么是事件循环Event-loop</title>
+      <link href="/2019/10/08/js-Event/"/>
+      <url>/2019/10/08/js-Event/</url>
+      
+        <content type="html"><![CDATA[<h3 id="先上代码"><a href="#先上代码" class="headerlink" title="先上代码"></a>先上代码</h3><pre><code class="javascript">console.log(1)// setTimeout1setTimeout(function () {  new Promise(function (resolve) {    console.log(&#39;promise in setTimeout1&#39;)    resolve()  }).then(function () {    console.log(&#39;then in setTimeout1&#39;)  })}, 10)new Promise(function (resolve) {  console.log(3)  for (var i = 100000; i &gt; 0; i--) {    i == 1 &amp;&amp; resolve()  }  console.log(4)}).then(function () {  console.log(5)})// setTimeout2setTimeout(function () {  console.log(&#39;setTimeout2&#39;)}, 10)console.log(7)</code></pre><h3 id="执行顺序"><a href="#执行顺序" class="headerlink" title="执行顺序"></a>执行顺序</h3><ol><li>首先 js 整块代码为宏任务，放入宏任务队列，为第一个宏任务，所以先执行第一个，结果先输出 1</li><li>遇到第一个 setimeout 放入定时器线程，等定时器执行完，将回调放入 宏任务队列中，10ms 后放入宏任务队列，此时回调队列中有<code>[js整块代码为一次宏任务,setimout1的回调]</code></li><li>继续执行,看到 promise.then 为微任务，所以先将 newpromis 中的同步操作先输出 3、4，然后将.then 回调放入 微任务队列中，所以现在微任务队列有 <code>[.then]</code></li><li>继续向下执行 看到 setimout 为宏任务，所以先放入宏任务队列中去不管他,所以当前宏任务队列中有<code>[js整块代码为一次宏任务,setimout1的回调,setimout2的回调]</code></li><li>执行输出 7 ,到此 第一次宏任务也就是 js 整体代码块执行完了，然后看看 有没有待执行的微任务，现在微任务队列中有<code>[.then]</code>所以输出 5 ,然后没有微任务了</li></ol><h4 id="以上-js-第一次宏任务执行完毕，输出结果为-1-3-4-7-5-接下来，看看宏任务队列是否有其他的宏任务-我们看到第四点中-宏任务队列有-js整块代码为一次宏任务-setimout1的回调-setimout2的回调-那接下来执行第二个宏任务，也就是-setimout1-的回调"><a href="#以上-js-第一次宏任务执行完毕，输出结果为-1-3-4-7-5-接下来，看看宏任务队列是否有其他的宏任务-我们看到第四点中-宏任务队列有-js整块代码为一次宏任务-setimout1的回调-setimout2的回调-那接下来执行第二个宏任务，也就是-setimout1-的回调" class="headerlink" title="以上 js 第一次宏任务执行完毕，输出结果为,1-3-4-7-5 接下来，看看宏任务队列是否有其他的宏任务,我们看到第四点中 宏任务队列有[js整块代码为一次宏任务,setimout1的回调,setimout2的回调],那接下来执行第二个宏任务，也就是 setimout1 的回调"></a>以上 js 第一次宏任务执行完毕，输出结果为,1-3-4-7-5 接下来，看看宏任务队列是否有其他的宏任务,我们看到第四点中 宏任务队列有<code>[js整块代码为一次宏任务,setimout1的回调,setimout2的回调]</code>,那接下来执行第二个宏任务，也就是 setimout1 的回调</h4><ol start="6"><li>setimout1 回调部分，可以看到顺序执行，有一个输出 <code>console.log(&#39;promise in setTimeout1&#39;)</code>;，然后有个.then 的回调函数输出 <code>console.log(&#39;then in setTimeout1&#39;)</code>;根据机制，肯定先执行宏任务后执行.then 微任务，到此执行结果为：<code>1-3-4-7-5-promise in setTimeout1-then in setTimeout1</code></li><li>,接下来看到当前宏任务中没有其他微任务了，所以接着执行宏任务队列中第三个宏任务，也就是 setimout2 的回调<br>所以最后的结果为<code>1-&gt;3-&gt;4-&gt;7-&gt;5-&gt;promise in setTimeout1-&gt;then in setTimeout1-&gt;setTimeout2</code></li></ol><hr><h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><ul><li>宏任务有宏任务队列</li><li>微任务有微任务队列</li><li>js 一次只能执行一个宏任务</li><li>执行完第一个宏任务，准备执行第二个宏任务的时候要看看微任务队列中有没有可执行的微任务，如果有，优先将微任务执行完成</li></ul><h4 id="以上的过程不断地重复就形成了-EVENT-LOOP"><a href="#以上的过程不断地重复就形成了-EVENT-LOOP" class="headerlink" title="以上的过程不断地重复就形成了 EVENT-LOOP"></a>以上的过程不断地重复就形成了 EVENT-LOOP</h4>]]></content>
+      
+      
+      <categories>
+          
+          <category> javascript </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>webpack性能优化之产出代码优化</title>
       <link href="/2019/03/16/webpack%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B9%8B%E4%BA%A7%E5%87%BA%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96/"/>
       <url>/2019/03/16/webpack%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B9%8B%E4%BA%A7%E5%87%BA%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96/</url>
@@ -79,25 +98,6 @@
     
     
     <entry>
-      <title>BFC 是什么？</title>
-      <link href="/2018/12/14/BFC/"/>
-      <url>/2018/12/14/BFC/</url>
-      
-        <content type="html"><![CDATA[<p>BFC 即块级格式化上下文 ，它是只元素 通过触发 BFC ，形成一个封闭的上下文，可以用来包住浮动元素（不是清除浮动哟）。就算子元素再怎么折腾，也不会影响外部元素了</p><p>display: flow-root 这个属性的功能就一个：触发 BFC</p><p>float 的值不为 none。<br>overflow 的值为 auto,scroll 或 hidden。<br>display 的值为 table-cell, table-caption, inline-block 中的任何一个。<br>position 的值不为 relative 和 static。</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> CSS </category>
-          
-      </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>webpack 基本配置</title>
       <link href="/2018/12/14/webpac%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/"/>
       <url>/2018/12/14/webpac%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/</url>
@@ -117,6 +117,25 @@
             <tag> 工具 </tag>
             
         </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>BFC 是什么？</title>
+      <link href="/2018/12/14/BFC/"/>
+      <url>/2018/12/14/BFC/</url>
+      
+        <content type="html"><![CDATA[<p>BFC 即块级格式化上下文 ，它是只元素 通过触发 BFC ，形成一个封闭的上下文，可以用来包住浮动元素（不是清除浮动哟）。就算子元素再怎么折腾，也不会影响外部元素了</p><p>display: flow-root 这个属性的功能就一个：触发 BFC</p><p>float 的值不为 none。<br>overflow 的值为 auto,scroll 或 hidden。<br>display 的值为 table-cell, table-caption, inline-block 中的任何一个。<br>position 的值不为 relative 和 static。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> CSS </category>
+          
+      </categories>
+      
       
     </entry>
     

@@ -60,9 +60,39 @@
                 <div class="content animated fadeIn">
                     <div class="set">
                         <h1 style="text-align: center">Archived</h1>
-                        <p style="text-align: center">「 25 」</p>
+                        <p style="text-align: center">「 26 」</p>
                         <ul class="timeline timeline-centered">
                             
+                            
+                                
+                                <li class="timeline-item period">
+                                    <div class="timeline-info"></div>
+                                    <div class="timeline-marker"></div>
+                                    <div class="timeline-content">
+                                        <h2 class="timeline-title">十月 2019</h2>
+                                    </div>
+                                </li>
+                                
+                                <li class="timeline-item">
+                                    <div class="timeline-info">
+                                        <span class="gradient-text">十月 08, 2019</span>
+                                    </div>
+                                    <div class="timeline-marker"></div>
+                                    <div class="timeline-content">
+                                        <a class="timeline-title" target="_self" href="/2019/10/08/js-Event/">彻彻底底搞明白，什么是宏任务，什么是微任务，什么是事件循环Event-loop</a>
+                                        <p>
+                                            先上代码console.log(1)
+
+// setTimeout1
+setTimeout(function () {
+  new Promise(function (resolve) {
+    console.log(&#39;promise in setTimeout1&#39;)
+    resolve()
+  }).then(function () {
+    console.lo...
+                                        </p>
+                                    </div>
+                                </li>
                             
                                 
                                 <li class="timeline-item period">
@@ -154,11 +184,12 @@ module.export = {
                                     </div>
                                     <div class="timeline-marker"></div>
                                     <div class="timeline-content">
-                                        <a class="timeline-title" target="_self" href="/2018/12/14/BFC/">BFC 是什么？</a>
+                                        <a class="timeline-title" target="_self" href="/2018/12/14/webpac%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/">webpack 基本配置</a>
                                         <p>
-                                            BFC 即块级格式化上下文 ，它是只元素 通过触发 BFC ，形成一个封闭的上下文，可以用来包住浮动元素（不是清除浮动哟）。就算子元素再怎么折腾，也不会影响外部元素了
-display: flow-root 这个属性的功能就一个：触发 BFC
-float 的值不为 none。overflow 的值为 auto,scroll 或 hidden。display 的值为 table-cell, ta...
+                                            首先 公共 webpack.common.js 和 webpack.dev.js webpack.prod.js 通过 webpack-merge (smart) 去做拆分webpack 一切皆模块 ，配置 css loader 需要将 css 单独摘出来
+webpack.commom.js
+const path = require(&#39;path&#39;)
+const HtmlWeb...
                                         </p>
                                     </div>
                                 </li>
@@ -170,12 +201,11 @@ float 的值不为 none。overflow 的值为 auto,scroll 或 hidden。display �
                                     </div>
                                     <div class="timeline-marker"></div>
                                     <div class="timeline-content">
-                                        <a class="timeline-title" target="_self" href="/2018/12/14/webpac%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/">webpack 基本配置</a>
+                                        <a class="timeline-title" target="_self" href="/2018/12/14/BFC/">BFC 是什么？</a>
                                         <p>
-                                            首先 公共 webpack.common.js 和 webpack.dev.js webpack.prod.js 通过 webpack-merge (smart) 去做拆分webpack 一切皆模块 ，配置 css loader 需要将 css 单独摘出来
-webpack.commom.js
-const path = require(&#39;path&#39;)
-const HtmlWeb...
+                                            BFC 即块级格式化上下文 ，它是只元素 通过触发 BFC ，形成一个封闭的上下文，可以用来包住浮动元素（不是清除浮动哟）。就算子元素再怎么折腾，也不会影响外部元素了
+display: flow-root 这个属性的功能就一个：触发 BFC
+float 的值不为 none。overflow 的值为 auto,scroll 或 hidden。display 的值为 table-cell, ta...
                                         </p>
                                     </div>
                                 </li>
