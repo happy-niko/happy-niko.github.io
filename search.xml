@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>如何在本地进行微信授权的测试呢？</title>
+      <link href="/2020/06/02/wechat/"/>
+      <url>/2020/06/02/wechat/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>我们项目本地 webpack serve 启动的服务往往都是 Ip:port 形式，如果在微信开发工具中，去调试微信授权 ，那么会报 redirect_uri 错误，原因是，微信的回调地址必须得是外网备案的域名。且已经绑定到微信公众号后台中。那么，如何可以让本地 Ip 通过外网访问呢？ 那就需要使用到 ==内网穿透==</p></blockquote><h4 id="具体步骤如下"><a href="#具体步骤如下" class="headerlink" title="具体步骤如下"></a>具体步骤如下</h4><ol><li>本地启动项目，如我的项目为 127.0.0.1:8080 ,是 vue 项目。</li><li>去 natapp 官网申请一个 隧道具体详看 <a href="https://natapp.cn/article/natapp_newbie" target="_blank" rel="noopener">新手一分钟文档</a></li><li>申请好隧道本地也启动好了 内网穿透，接下来需要测试访问 <a href="http://zyycxsx.natapp1.cc(这个是你申请的隧道域名)" target="_blank" rel="noopener">http://zyycxsx.natapp1.cc(这个是你申请的隧道域名)</a> 如果可以打开则代表配置成功</li><li>webpack.dev.config ==&gt; devServe 中添加参数</li></ol><pre><code class="javascript">devServer: {  disableHostCheck: true}</code></pre><ol start="5"><li>将 授权地址域名更换为你的隧道名称 <a href="http://zyycxsx.natapp1.cc" target="_blank" rel="noopener">http://zyycxsx.natapp1.cc</a></li><li>在本地 Static 目录下 放入 微信 js 安全域名配置的校验文件，通常是 <code>MP_verify_xxx.txt</code></li><li>webpack.dev.conf.js 中配置</li></ol><pre><code class="javascript">const CopyWebpackPlugin = require(&#39;copy-webpack-plugin&#39;)new CopyWebpackPlugin([{        from: path.resolve(__dirname, &#39;../static&#39;),        to: config.dev.assetsSubDirectory,        ignore: [&#39;.*&#39;]      },      &lt;!- 此处配置可以将资源以txt类型访问---&gt;      {        from: path.resolve(__dirname, &#39;../static/MP_verify_UZ7FPNDytS79Kaje.txt&#39;),        to: &#39;MP_verify_UZ7FPNDytS79Kaje.txt&#39;,        toType: &#39;file&#39;      } ])</code></pre>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>彻彻底底搞明白，什么是宏任务，什么是微任务，什么是事件循环Event-loop</title>
       <link href="/2019/10/08/js-Event/"/>
       <url>/2019/10/08/js-Event/</url>
